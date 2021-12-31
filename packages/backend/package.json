@@ -2,11 +2,11 @@
   "name": "ufe-tree-tracking-app-backend",
   "version": "1.0.0",
   "description": "Backend for Urban Forest Ecosystem tree tracking app.",
-  "main": "server.ts",
+  "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run dev",
-    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' server.ts"
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts"
   },
   "repository": {
     "type": "git",
