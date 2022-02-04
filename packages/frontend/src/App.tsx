@@ -1,13 +1,18 @@
+import { TreeTrackingForm } from './new-tree/tree-tracking-form';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { TreeTrackingForm } from './new-tree/tree-tracking-form';
+import { Home } from './home/Home';
+import { StandardPage } from './standard-page/StandardPage';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/new-tree" element={<TreeTrackingForm />} />
-      </Routes>
+      <StandardPage>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/new-tree" element={<TreeTrackingForm />} />
+        </Routes>
+      </StandardPage>
     </BrowserRouter>
   );
 }
