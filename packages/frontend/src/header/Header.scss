@@ -1,0 +1,29 @@
+@use '../global-variables' as gv;
+
+header {
+  /* Kinda messy, will order later */
+  background-color: gv.$bkg-color;
+  filter: drop-shadow(0 0px 5px #6b6b6b);
+  max-height: gv.$header-height;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: gv.$dark-color;
+  position: fixed;
+  z-index: 1;
+
+  a {
+    color: gv.$dark-color;
+    text-decoration: none;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    text-decoration: none;
+  }
+
+  a:active {
+    text-decoration: underline;
+  }
+}
