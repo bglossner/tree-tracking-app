@@ -1,0 +1,10 @@
+#new-tree {
+  margin: 10px auto;
+  width: fit-content;
+
+  .tree-photo {
+    max-width: 25vw;
+    max-height: 25vh;
+    object-fit: contain;
+  }
+}

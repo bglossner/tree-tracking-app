@@ -1,6 +1,9 @@
-import { useForm } from "react-hook-form";
+import './tree-tracking-form.scss';
+import { Controller, useForm } from "react-hook-form";
 import * as exifr from "exifr";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
+import CreatableSelect from 'react-select/creatable';
+import { FormField } from '../util/forms/FormField';
 
 type TreeTrackingFormProps = {
 };
@@ -23,8 +26,37 @@ const getGpsCoords = async (file: File) => new Promise<GPSResult>((resolve, reje
   };
 });
 
+const treeSpecies: string[] = [
+  "redwood",
+  "pine",
+  "spruce",
+  "sequoia",
+  "palm",
+  "two words",
+];
+
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+const capitalize = (s: string) => {
+  return s.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+};
+
+const speciesListToSelectOptions = (species: string[]): SelectOption[] => {
+  return species.map(s => ({ value: s.toLowerCase(), label: capitalize(s) }))
+};
+
 export const TreeTrackingForm: React.FC<TreeTrackingFormProps> = (props) => {
-  const { register, handleSubmit, getValues, setError, formState: { errors, isSubmitting } } = useForm();
+  const { register, control, handleSubmit, getValues, setError, formState: { errors, isSubmitting } } = useForm();
+  const [species, setSpecies] = useState<string[]>([]);
+  const [speciesAsOptions, setSpeciesAsOptions] = useState<SelectOption[]>([]);
+
+  useEffect(() => {
+    setSpecies(treeSpecies);
+    setSpeciesAsOptions(speciesListToSelectOptions(treeSpecies));
+  }, []);
 
   const [photoObject, setPhotoObject] = useState<string | undefined>(undefined);
 
@@ -47,6 +79,7 @@ export const TreeTrackingForm: React.FC<TreeTrackingFormProps> = (props) => {
         type: "invalidImage",
         message: "That is not a valid image!"
       });
+      return;
     }
 
     setPhotoObject(URL.createObjectURL(treePhoto));
@@ -66,16 +99,38 @@ export const TreeTrackingForm: React.FC<TreeTrackingFormProps> = (props) => {
     console.log(latitude, longitude);
   };
 
+  console.log(errors);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("treeSpecies", { required: false })} />
-      {errors.exampleRequired && <span>This field is required</span>}
+    <form id="new-tree" onSubmit={handleSubmit(onSubmit)}>
+      <FormField label="Planter (name of group/person)" errors={errors.planter}>
+        <input {...register("planter", { required: true })} type="text" />
+      </FormField>
+      <FormField errors={errors.treeSpeciesSelector} label="Tree Species">
+        <Controller
+          control={control}
+          name="treeSpeciesSelector"
+          rules={{ required: true }}
+          render={({
+            field: { onChange },
+          }) => (
+            <CreatableSelect
+              isClearable
+              onChange={onChange}
+              defaultValue={speciesAsOptions?.[0]}
+              options={speciesAsOptions}
+            />
+          )}
+        />
+      </FormField>
       <br />
       {/* perhaps give a drap/drop too */}
-      <input {...register("treeImage", { onChange: onTreeFileUpload })} type="file" />
+      <FormField label="Photo(s) of Tree" errors={errors.treeImage}>
+        <input {...register("treeImage", { onChange: onTreeFileUpload })} type="file" />
+      </FormField>
       {
         !!getValues("treeImage") && !errors.treeImage && photoObject ? (
-          <img src={photoObject} alt="Uploaded tree." />
+          <img className="tree-photo" src={photoObject} alt="Uploaded tree." />
         ) : null
       }
 
