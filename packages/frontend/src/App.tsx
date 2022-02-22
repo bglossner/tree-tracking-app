@@ -5,11 +5,9 @@ import { StandardPage } from './standard-page/StandardPage';
 function App() {
   return (
     <BrowserRouter>
-      <StandardPage>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </StandardPage>
+      <Routes>
+        <Route path="/" element={<StandardPage component={<Home />} />} />
+      </Routes>
     </BrowserRouter>
   );
 }
