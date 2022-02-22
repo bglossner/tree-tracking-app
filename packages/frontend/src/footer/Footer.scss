@@ -3,26 +3,47 @@
 footer {
   position: absolute;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   height: gv.$footer-height;
   background-color: gv.$secondary-color;
   color: white;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 3.2fr 5fr 2fr;
-  overflow-y: hidden;
 
-  .logos {
-    display: flex;
-    padding-left: 4%;
-    justify-content: space-between;
-    align-items: center;
+  div.outer-div {
+    width: 100%;
+    position: relative;
   }
 
-  #left-white-border {
-    margin-left: 5%;
-    width: 100%;
-    height: 70%;
-    border-left: solid 5px white;
+  div.inner-div {
+    margin: 0 auto;
+    position: relative;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ufei-container {
+    width: fit-content;
+  }
+
+  p {
+    color: #666;
+  }
+
+  .logo-container {
+    width: 25%;
+    
+    #calpoly-footer-logo {
+      object-fit: scale-down;
+      max-width: 100%;
+      // Maybe set this as background image to prevent this issue
+      max-height: gv.$footer-height;
+    }
+  }
+
+  #privacy-notice {
+    color: #457537;
+    text-decoration: none;
   }
 }

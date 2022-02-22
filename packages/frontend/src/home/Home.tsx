@@ -3,8 +3,6 @@ import './Home.scss'
 export const Home = () => {
   return (
     <main>
-      {/* Spacer makes content start bellow header when at top of page */}
-      <div id='Header-Spacer'></div>
       {/* Just filler text to demo scrolling. Header links scroll tp specific id tags */}
       <h1 id='TreeCounter' className='anchor'>Tree Counter</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed tempus urna et pharetra pharetra massa massa ultricies mi. Ut etiam sit amet nisl purus. Tortor consequat id porta nibh venenatis cras sed. Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet. Aliquet nibh praesent tristique magna. Ut pharetra sit amet aliquam id diam maecenas ultricies mi. Eu augue ut lectus arcu bibendum at varius. A erat nam at lectus urna duis convallis convallis tellus. Euismod lacinia at quis risus. Amet volutpat consequat mauris nunc congue nisi vitae suscipit. Orci phasellus egestas tellus rutrum tellus. Amet consectetur adipiscing elit ut aliquam purus.</p>
