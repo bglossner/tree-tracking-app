@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { generateForm } from './survey123-interface';
 import './tree-tracking-form.scss';
 
@@ -40,6 +40,14 @@ const onFormFailed = (formFailedCallback: FormDataEventFn) => {
   }
 };
 
+const setHeightBasedOnData = (container: HTMLElement | null, data: any) => {
+  if (container?.style && data?.contentHeight) {
+    const height = data.contentHeight;
+    container.style.height = `${height}px`;
+    container.style.paddingBottom = "unset" ;
+  }
+};
+
 export interface ITreeTrackingFormProps {
   onNewTreeSubmission?: (data: any) => void;
 };
@@ -49,26 +57,39 @@ export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formSubmitError, setFormSubmitError] = useState(false);
   const [formFailed, setFormFailed] = useState(false);
-
-  const onFormSubmission = (_webform: any, data: any) => {
-    setFormSubmitError(false);
-    setFormSubmitted(true);
-
-    if (onNewTreeSubmission) {
-      onNewTreeSubmission(data);
-    }
-  };
+  const divContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const onFormSubmission = (_webform: any, data: any) => {
+      setFormSubmitError(false);
+      setFormSubmitted(true);
+  
+      if (onNewTreeSubmission) {
+        onNewTreeSubmission(data);
+      }
+    };
+    
+    const formLoadedFn = (_webform: any, data: any) => {
+      setHeightBasedOnData(divContainerRef.current, data);
+
+      setFormLoaded(true);
+    };
+
+    const onFormResized = (data: any) => {
+      setHeightBasedOnData(divContainerRef.current, data);
+    };
+
     // Don't rerender form if it's already on page
     if (!document.getElementById(SURVEY_DIV_CONTAINER)?.querySelector('iframe')) {
       generateForm(
         SURVEY_DIV_CONTAINER,
-        onFormLoaded(() => setFormLoaded(true)),
+        onFormLoaded(formLoadedFn),
         onFormSubmitted(onFormSubmission, () => setFormSubmitError(true)),
-        onFormFailed(() => setFormFailed(true)));
+        onFormFailed(() => setFormFailed(true)),
+        onFormResized,
+      );
     }
-  }, []);
+  }, [onNewTreeSubmission]);
 
   // some change
 
@@ -76,7 +97,7 @@ export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps
     <>
       {!formLoaded && !formFailed && <p style={{ fontSize: "3em" }}>The form is still loading. Please wait!</p>}
       {formFailed && <p>The form failed to load due to some third party cookie issues. Please enable cookies!</p>}
-      <div id={SURVEY_DIV_CONTAINER} />
+      <div ref={divContainerRef} id={SURVEY_DIV_CONTAINER} />
     </>
   );
 };

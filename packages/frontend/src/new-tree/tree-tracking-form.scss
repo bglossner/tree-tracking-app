@@ -4,7 +4,8 @@
   margin: 10px auto;
   text-align: center;
   width: 80vw;
-  height: calc(100vh - gv.$footer-height);
+  height: fit-content;
+  // height: calc(100vh - gv.$footer-height);
 
   iframe {
     width: 100%;

@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const generateForm = (container, onFormLoad, onFormSubmit, onFormFail) => {
+export const generateForm = (container, onFormLoad, onFormSubmit, onFormFail, onFormResized) => {
   const webform = new Survey123WebForm({
     clientId: "YUnfvUenRS5bzPOW",
     container: container,
@@ -15,5 +15,9 @@ export const generateForm = (container, onFormLoad, onFormSubmit, onFormFail) =>
 
   webform.setOnFormFailed(data => {
     onFormFail(webform, data);
+  });
+
+  webform.setOnFormResized(data => {
+    onFormResized(data);
   });
 };

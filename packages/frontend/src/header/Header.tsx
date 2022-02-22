@@ -6,7 +6,7 @@ import ufeiLogo from '../assets/images/ufei-logo.png';
 
 const ACTIVE_STYLE: CSSProperties = {
   textDecoration: "underline",
-  textUnderlineOffset: "0.5vh",
+  textUnderlineOffset: "2vh",
 };
 
 interface INavLinkInfo {
@@ -16,7 +16,7 @@ interface INavLinkInfo {
 
 const HomeNavLinks: INavLinkInfo[] = [
   {
-    to: "#top",
+    to: "/#top",
     innerText: "Register a Tree",
   },
   {
