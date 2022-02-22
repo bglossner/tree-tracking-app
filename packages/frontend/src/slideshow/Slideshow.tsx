@@ -1,10 +1,41 @@
+import { useEffect } from 'react';
 import './Slideshow.scss';
 
 /* Slideshow modified from https://www.w3schools.com/howto/howto_js_slideshow.asp */
 
 export const Slideshow = () => {
-  const slideCount: number = 4;
   var slideIndex: number = 0;
+
+  /* Define abstract slide */
+  interface ISlide {
+    text: string,
+    imageSrc: string,
+    labelText: string
+  }
+
+  /* Create slide list */
+  const slideList: ISlide[] = [
+    {
+      text: "As part of the mission for San Luis Obispo to be Carbon Neutral by 2035, we are on a journey to plant 10,000 trees in the city by 2035.",
+      imageSrc: "/images/slide1.png",
+      labelText: "MISSION"
+    },
+    {
+      text: "Want to plant a tree but don’t know how? Don’t worry! We have all the resources for you to have a successful planting experience.",
+      imageSrc: "/images/slide2.png",
+      labelText: "HOW TO PLANT"
+    },
+    {
+      text: "Not comfortable with planting your own tree? Sign up to adopt a tree! By adopting, you will take care of the tree you sign-up for by watering and more. We appreciate your help!",
+      imageSrc: "/images/slide3.png",
+      labelText: "ADOPTING A TREE"
+    },
+    {
+      text: "Want to help in other ways? Check out resources from our partners.",
+      imageSrc: "/images/slide4logos.png",
+      labelText: "OUR PARTNERS"
+    }
+  ];
 
   // Called when an arrow is clicked
   const arrowClickHandler = (event: React.MouseEvent<HTMLElement>) => {
@@ -15,9 +46,9 @@ export const Slideshow = () => {
 
     // Change slide
     if (arrow.className == "next") {
-      slideIndex = (slideIndex + 1) % slideCount;
+      slideIndex = (slideIndex + 1) % slideList.length;
     } else {
-      slideIndex = (slideIndex + slideCount - 1) % slideCount;
+      slideIndex = (slideIndex + slideList.length - 1) % slideList.length;
     }
     changeSlide(slideIndex);
 
@@ -63,37 +94,37 @@ export const Slideshow = () => {
     const slide = slides[index] as HTMLElement;
     slide.style.display = "block";  
     dots[index].className += " active";
+    
+    // Debug
+    console.log("Slide changed to ",index);
   }
 
+  /* Preload images */
+  useEffect(() => {
+    slideList.forEach((slide) => {
+      const img = new Image();
+      img.src = slide.imageSrc;
+    });
+  }, []);
+
+  /* Create page structure */
   return (
-    <div className='slideshow'>
+    <div className='slideshow' onLoad={() => changeSlide(0)}>
 
-      <div className="slide fade">
-        <div className="numbertext">1 / 4</div>
-        <img src="calpoly-logo.png"/>
-        <div className="text">Caption Text</div>
-      </div>
+      {
+      /* Create slides from list */
+      slideList.map(({text, imageSrc, labelText}, index, arr) => (
+        <div className="slide">
+          <div className="numbertext">{index+1} / {arr.length}</div>
+          <div className="labelText">{labelText}</div>
+          <img src={imageSrc}/>
+          <div className="text">{text}</div>
+        </div>
+      ))
+      }
 
-      <div className="slide fade">
-        <div className="numbertext">2 / 4</div>
-        <img src="calpoly-logo.png"/>
-        <div className="text">Caption Two</div>
-      </div>
-
-      <div className="slide fade">
-        <div className="numbertext">3 / 4</div>
-        <img src="calpoly-logo.png"/>
-        <div className="text">Caption Three</div>
-      </div>
-
-      <div className="slide fade">
-        <div className="numbertext">4 / 4</div>
-        <img src="calpoly-logo.png"/>
-        <div className="text">Caption Four</div>
-      </div>
-
-      <a className="prev" onClick={arrowClickHandler}>&lsaquo;</a>
-      <a className="next" onClick={arrowClickHandler}>&rsaquo;</a>
+      <a className="prev" onClick={arrowClickHandler}>&lt;</a>
+      <a className="next" onClick={arrowClickHandler}>&gt;</a>
 
       <div className='dotContainer'>
         <span className="dot" onClick={(event: React.MouseEvent<HTMLElement>) => dotClickHandler(event,0)}></span> 

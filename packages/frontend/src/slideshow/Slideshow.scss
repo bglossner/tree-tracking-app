@@ -1,24 +1,48 @@
 @use '../global-variables' as gv;
 
+@font-face {
+  font-family: 'Shizuru';
+  src: url('/fonts/Shizuru-Regular.woff') format('woff'),
+      url('/fonts/Shizuru-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular.woff') format('woff'),
+      url('/fonts/OpenSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .slideshow {
-  box-sizing: border-box;
-  max-width: 100%;
+  //box-sizing: border-box;
+  max-width: 75%;
+  width: 1000px;
   position: relative;
   margin: auto;
 
   /* Container for slide image and text */
   .slide {
     display: none;
+    font-size: 2rem;
+    font-family: 'Open Sans', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: left;
 
     /* Caption text */
     .text {
-      color: #f2f2f2;
-      font-size: 15px;
       padding: 8px 12px;
       position: absolute;
-      bottom: 8px;
-      width: 100%;
-      text-align: center;
+      bottom: 10%;
+      height: 25%;
+      max-width: 100%;
+
+      color: #f2f2f2;
+
+      background-color: #0006;
     }
 
     /* Background image */
@@ -29,22 +53,46 @@
 
     /* Number text (1/3 etc) */
     .numbertext {
-      color: #f2f2f2;
-      font-size: 12px;
       padding: 8px 12px;
       position: absolute;
       top: 0;
+      right: 0;
+
+      color: #f2f2f2;
+      font-size: 12px;
+    }
+
+    /* Slide label */
+    .labelText {
+      padding: 8px 10% 9px 10px;
+      position: absolute;
+      top: 3%;
+
+      border-color: gv.$dark-color;
+      border-width: 0;
+      border-left-width: 3px;
+      border-style: solid;
+      background-color: gv.$bkg-color;
+
+      color: gv.$dark-color;
+      font-weight:900;
     }
   }
 
   /* Container for navigation dots */
   .dotContainer {
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+    text-align: center;
+
     /* The dots/bullets/indicators */
     .dot {
       cursor: pointer;
-      height: 14px;
-      width: 14px;
-      margin: 0 2px;
+      height: 10px;
+      width: 10px;
+      margin: 0 32px;
       background-color: #FFF8;
       border-radius: 50%;
       display: inline-block;
@@ -57,8 +105,8 @@
 
     .active {
       background-color: #FFFF;
-      height: 16px;
-      width: 16px;
+      //height: 16px;
+      //width: 16px;
     }
   }
 
@@ -68,14 +116,18 @@
     user-select: none;
 
     position: absolute;
-    //top: 50%;
-    //width: auto;
-    padding: 5px 8px 6px 8px;
+    top: 50%;
+    width: auto;
+    margin-top: -6%; // Pull button higher
+    //padding: 1rem 3px 2rem 3px;
+    padding: 0rem 1rem;
 
     color: white;
-    font-family:'Courier New', Courier, cursive;
-    font-size: 2.5rem;
+    font-family: 'Shizuru';
+    font-size: 500%;
     font-weight: bold;
+    text-align: center;
+    //line-height: 0rem;
 
     transition: 0.4s ease;
   }
@@ -91,25 +143,18 @@
   }
   
   .next:hover, .prev:hover {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: #000C;
   }
 
   /* Fading animation */
-  .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
+  .ssAnim {
+    animation-name: slideLeft;
     animation-duration: 1.5s;
   }
 
-  @-webkit-keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-  }
-
-  @keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
+  @keyframes slideLeft {
+    from    {width:0%} 
+    to      {width:100%}
   }
 
 }
