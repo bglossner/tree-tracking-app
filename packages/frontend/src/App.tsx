@@ -6,12 +6,10 @@ import { StandardPage } from './standard-page/StandardPage';
 function App() {
   return (
     <BrowserRouter>
-      <StandardPage>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/new-tree" element={<TreeTrackingForm />} />
-        </Routes>
-      </StandardPage>
+      <Routes>
+        <Route path="/" element={<StandardPage component={<Home />} />} />
+        <Route path="/new-tree" element={<StandardPage component={<TreeTrackingForm />} />} />
+      </Routes>
     </BrowserRouter>
   );
 }
