@@ -1,9 +1,5 @@
 @use '../global-variables' as gv;
 
-html {
-  scroll-behavior: smooth;
-}
-
 main {
   background-color: gv.$bkg-color;
   text-align: center;
@@ -13,9 +9,4 @@ main {
 .anchor {
   padding-top: gv.$header-height;
   margin-top: calc(-1 * gv.$header-height);
-}
-
-#Header-Spacer {
-  min-height: gv.$header-height;
-  position: relative;
 }
