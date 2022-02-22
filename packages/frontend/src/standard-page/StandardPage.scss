@@ -1,6 +1,6 @@
 @use '../global-variables' as gv;
 
 .standard-page {
-  padding-bottom: gv.$footer-height;
-  overflow-x: hidden;
+  padding-bottom: calc(gv.$footer-height + 2vh);
+  padding-top: calc(gv.$header-height + 2vh);
 }
