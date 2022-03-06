@@ -1,11 +1,18 @@
 import { Footer } from '../footer/Footer';
+import { Header } from '../header/Header';
 import './StandardPage.scss';
 
-export const StandardPage: React.FC = ({children}) => {
+export interface IStandardPageProps {
+  useTopPadding?: boolean;
+  component: JSX.Element;
+};
+
+export const StandardPage: React.FC<IStandardPageProps> = ({ component, useTopPadding }) => {
   return (
     <>
-      <div className="standard-page">
-        {children}
+      <Header />
+      <div className={`standard-page ${useTopPadding ? 'standard-page-top-padding' : ''}`}>
+        {component}
       </div>
       <Footer />
     </>

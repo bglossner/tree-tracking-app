@@ -1,0 +1,12 @@
+@use '../global-variables' as gv;
+
+main {
+  background-color: gv.$bkg-color;
+  text-align: center;
+  color: gv.$dark-color;
+}
+
+.anchor {
+  padding-top: gv.$header-height;
+  margin-top: calc(-1 * gv.$header-height);
+}
