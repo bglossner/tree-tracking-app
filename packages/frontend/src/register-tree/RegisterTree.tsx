@@ -16,7 +16,7 @@ export const RegisterTree = () => {
       </Container>
       <div className='tree-action-btns-container'>
         <a href='/new-tree' className='tree-action'>Register a Tree</a>
-        <a href='/adopt-tree' className='tree-action'>Adopt a Tree</a>
+        {/* <a href='/adopt-tree' className='tree-action'>Adopt a Tree</a> */}
       </div>
     </div>
   );
