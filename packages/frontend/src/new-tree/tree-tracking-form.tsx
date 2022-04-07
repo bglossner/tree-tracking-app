@@ -61,6 +61,8 @@ export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps
 
   useEffect(() => {
     const onFormSubmission = (_webform: any, data: any) => {
+      console.log(data);
+      console.log(_webform);
       setFormSubmitError(false);
       setFormSubmitted(true);
   

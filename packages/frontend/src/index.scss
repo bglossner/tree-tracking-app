@@ -6,8 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
-  min-height: 100vh;
+  min-height: calc(100vh - 5px);
   position: relative;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {

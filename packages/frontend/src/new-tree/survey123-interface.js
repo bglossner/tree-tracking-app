@@ -1,9 +1,11 @@
-/* eslint-disable */
+import { CLIENT_ID, SURVEY_ITEM_ID } from "../constants/ArcGIS";
+
 export const generateForm = (container, onFormLoad, onFormSubmit, onFormFail, onFormResized) => {
+  // eslint-disable-next-line no-undef
   const webform = new Survey123WebForm({
-    clientId: "YUnfvUenRS5bzPOW",
+    clientId: CLIENT_ID,
     container: container,
-    itemId: "ac2cf4bda3fb49e7bf4860b23850ec86",
+    itemId: SURVEY_ITEM_ID,
     onFormLoaded: (data) => {
       onFormLoad(webform, data);
     },
