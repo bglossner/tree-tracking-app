@@ -21,6 +21,13 @@ const HomeNavLinks: INavLinkInfo[] = [
   },
   {
     to: {
+      hash: "Plant",
+      pathname: "/",
+    },
+    innerText: "Plant a Tree",
+  },
+  {
+    to: {
       hash: "About",
       pathname: "/",
     },
