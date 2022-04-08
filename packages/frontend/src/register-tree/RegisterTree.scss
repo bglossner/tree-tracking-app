@@ -31,12 +31,13 @@
 
 .counter-holder {
   color: white;
-  padding: 7%;
+  padding: 2% 7% 0 0;
   height: 100%;
+  text-align: right;
 }
 
 .counter {
-  font-size: 175px;
+  font-size: 20vh;
   font-weight: 700;
   text-shadow: 2px 3px 2px black;
 }
@@ -45,6 +46,26 @@
   font-size: 32px;
   font-weight: 700;
   margin: 0;
+}
+
+.trees-planted-progress {
+  position: absolute;
+  left: 15%;
+  top: 25%;
+  width: 20vw;
+  height: 20vh;
+
+  p {
+    color: white;
+  }
+
+  #tree-outline {
+    height: 80%;
+  }
+}
+
+.CircularProgressbar-path {
+  stroke: gv.$green !important;
 }
 
 .tree-action-btns-container {
