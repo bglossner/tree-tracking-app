@@ -1,0 +1,19 @@
+@use "../global-variables" as gv;
+
+div {
+  .CircularProgressbar-path {
+    stroke: gv.$green;
+  }
+
+  .CircularProgressbar-trail {
+    stroke: gv.$bkg-color;
+  }
+
+  div[data-test-id="CircularProgressbarWithChildren__children"] {
+    margin-top: -103% !important;
+  }
+}
+
+.tree-outline-CirclePath {
+  height: 80%;
+}
