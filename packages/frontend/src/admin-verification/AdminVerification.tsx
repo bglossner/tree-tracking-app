@@ -9,10 +9,6 @@ export interface ITreeRecord {
 
 };
 
-export const featureServerUrl = "https://services1.arcgis.com/0j6vZbECadDEXdAS/arcgis/rest/services/survey123_ac2cf4bda3fb49e7bf4860b23850ec86_stakeholder/FeatureServer/0";
-
-const relatedQueryUrl = "https://services1.arcgis.com/0j6vZbECadDEXdAS/arcgis/rest/services/Verification_Table/FeatureServer/0";
-
 export function AdminVerification({ error, userSession, loading }: IProps) {
   const [unverifiedRecords, setUnverifiedRecords] = useState<ITreeRecord[]>([]);
   const [loadingRecords, setLoadingRecords] = useState(true);
@@ -23,7 +19,7 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
         url: featureServerUrl,
         outFields: ["globalid"],
         authentication: userSession,
-      }).then(x => {
+      }).then((x: any) => {
         console.log(x);
       });
 
