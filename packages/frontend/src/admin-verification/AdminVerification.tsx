@@ -1,5 +1,6 @@
 import { getLayer, queryFeatures, queryRelated } from "@esri/arcgis-rest-feature-layer";
 import { useEffect, useState } from "react";
+import { VERIFICATION_VIEW_URL } from "../constants/ArcGIS";
 import { IUserSessionInfo } from "../standard-page/arcgis-admin/ArcGISAdminPage";
 import { getTreesNotInVerifiedTable } from "./update-verification-table/helpers";
 
@@ -16,7 +17,7 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
   useEffect(() => {
     if (userSession) {
       queryFeatures({
-        url: featureServerUrl,
+        url: VERIFICATION_VIEW_URL,
         outFields: ["globalid"],
         authentication: userSession,
       }).then((x: any) => {
