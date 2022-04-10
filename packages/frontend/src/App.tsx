@@ -5,6 +5,7 @@ import { StandardPage } from './standard-page/StandardPage';
 import { ArcGISRedirect } from './admin-verification/arcgis-redirect/ArcGISRedirect';
 import { AdminVerification } from './admin-verification/AdminVerification';
 import { ArcGISAdminPage } from './standard-page/arcgis-admin/ArcGISAdminPage';
+import { TreeRegisterView } from './new-tree/TreeRegisterView';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/new-tree" element={<StandardPage component={<TreeTrackingForm />} />} />
         <Route path="/arcgis-redirect" element={<ArcGISRedirect />} />
         <Route path="/verification" element={<ArcGISAdminPage component={AdminVerification} />} />
+        <Route path="/test" element={<StandardPage component={<TreeRegisterView />} />} />
       </Routes>
     </BrowserRouter>
   );
