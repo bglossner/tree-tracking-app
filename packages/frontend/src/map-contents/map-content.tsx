@@ -1,20 +1,28 @@
+import { getAttachments, queryFeatures } from '@esri/arcgis-rest-feature-layer';
 import { useEffect } from 'react';
-// import { queryFeatures };
+import { MAP_URL, PUBLIC_VIEW_URL } from '../constants/ArcGIS';
 import './map-content.scss';
+import { MapSLO } from './Map/MapSLO';
+import { PlantedDashboard } from './planted-dashboard/PlantedDash';
 
 export const MapContent = () => {
 
-  // useEffect(() => {
-  //   queryFeatures
-  // }, []);
+  useEffect(() => {
+    queryFeatures({
+      url: PUBLIC_VIEW_URL,
+      resultRecordCount: 1,
+      orderByFields: "objectid DESC",
+    }).then(x => {
+      console.log(x);
+    })
+
+    fetch(`${PUBLIC_VIEW_URL}/queryAttachments?f=json`)
+  }, []);
 
   return (
     <div className="MapContent">
-          <div className="embed-container">
-            {/* <iframe width="700" height="500" scrolling="no" title="10000trees2" src="//calpoly.maps.arcgis.com/apps/Embed/index.html?webmap=c92fc1cead8241df9e8eb5c49c039fd2&extent=-180,-51.6726,63.3691,64.3589&zoom=true&previewImage=false&disable_scroll=true&theme=light"></iframe> */}
-            {/* <iframe width="700" height="500" scrolling="no" title="10000trees2" src="//calpoly.maps.arcgis.com/apps/Embed/index.html?webmap=c92fc1cead8241df9e8eb5c49c039fd2&zoom=true&previewImage=false&disable_scroll=true&theme=light&center=20,45&level=3"></iframe> */}
-
-          </div>
+      <MapSLO />
+      <PlantedDashboard />
     </div>
   );
 };
