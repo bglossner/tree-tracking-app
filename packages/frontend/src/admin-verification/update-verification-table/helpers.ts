@@ -1,6 +1,6 @@
 import { UserSession } from "@esri/arcgis-rest-auth";
 import { queryFeatures } from "@esri/arcgis-rest-feature-layer";
-import { featureServerUrl } from "../AdminVerification";
+import { VERIFICATION_VIEW_URL } from "../../constants/ArcGIS";
 
 export const MAX_ALLOWED_RECORDS = 100;
 
@@ -23,7 +23,7 @@ function range(size: number, startAt = 0) {
 
 export const getTreesNotInVerifiedTable = async (authentication: UserSession): Promise<IUnverifiedResults> => {
   const objectIds = await queryFeatures({
-    url: featureServerUrl,
+    url: VERIFICATION_VIEW_URL,
     returnIdsOnly: true,
     authentication,
   }) as IObjectIdResponse;

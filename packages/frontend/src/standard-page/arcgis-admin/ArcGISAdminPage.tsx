@@ -1,7 +1,6 @@
 import { UserSession, IOAuth2Options } from "@esri/arcgis-rest-auth";
 import { getLayer } from "@esri/arcgis-rest-feature-layer";
 import { useState, useEffect } from "react";
-import { featureServerUrl } from "../../admin-verification/AdminVerification";
 import { Footer } from "../../footer/Footer";
 import { Header, ILinkComponentProps, INavLinkInfo } from "../../header/Header";
 import {

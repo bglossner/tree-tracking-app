@@ -11,6 +11,7 @@ const HomeNavLinks: INavLinkInfo<ILinkComponentProps>[] = [
   {
     to: "/#top",
     innerText: "Get Involved",
+    shouldUnderline: true,
   },
   {
     to: {
@@ -18,6 +19,7 @@ const HomeNavLinks: INavLinkInfo<ILinkComponentProps>[] = [
       pathname: "/",
     },
     innerText: "About",
+    shouldUnderline: true,
   },
   {
     to: {
@@ -25,6 +27,7 @@ const HomeNavLinks: INavLinkInfo<ILinkComponentProps>[] = [
       pathname: "/",
     },
     innerText: "Map",
+    shouldUnderline: true,
   },
 ];
 
