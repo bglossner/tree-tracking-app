@@ -9,7 +9,6 @@ interface IProps {
 }
 
 export const PostRegistrationView = ({ treeNumber, submitAnotherTree }: IProps) => {
-  console.log('loading post registration');
   return (
     <main id="post-reg-view">
       <h2>You just planted tree<br /><span className="tree-number"># {treeNumber}</span></h2>

@@ -13,7 +13,6 @@ const LOAD_FROM_COUNT = false;
 export const TreeRegisterView = () => {
   const [treesSubmitted, setTreesSubmitted] = useState<ITreeSubmission[]>([]);
   const [currentTreeNumber, setCurrentTreeNumber] = useState<number | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<PageState>(PageState.NEW_TREE);
 
   const prevPage = usePrevious(currentPage);
