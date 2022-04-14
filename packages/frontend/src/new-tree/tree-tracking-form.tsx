@@ -2,6 +2,35 @@ import { useEffect, useRef, useState } from 'react';
 import { generateForm } from './survey123-interface';
 import './tree-tracking-form.scss';
 
+export interface IAddResult {
+  objectId: number;
+  uniqueId: number;
+  globalId: string;
+  success: boolean;
+}
+
+export interface ITreeSubmissionResult {
+  addResults: IAddResult[];
+  attachments: any;
+}
+
+export interface ISurveyFeatures {
+  attachments: any;
+  attributes: any;
+  geometry: any;
+  objectId: number;
+}
+
+export interface ISurveyFeatureSet {
+  features: ISurveyFeatures[];
+  form: any;
+}
+
+export interface ITreeSubmission {
+  result: ITreeSubmissionResult[];
+  surveyFeatureSet: ISurveyFeatureSet;
+}
+
 const SURVEY_DIV_CONTAINER = "survey-container";
 
 type FormDataEventFn = (webform: any, data: any) => void;
@@ -62,7 +91,6 @@ export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps
   useEffect(() => {
     const onFormSubmission = (_webform: any, data: any) => {
       console.log(data);
-      console.log(_webform);
       setFormSubmitError(false);
       setFormSubmitted(true);
   
@@ -97,7 +125,11 @@ export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps
 
   return (
     <>
-      {!formLoaded && !formFailed && <p style={{ fontSize: "3em" }}>The form is still loading. Please wait!</p>}
+      {!formLoaded && !formFailed && (
+        <div className='loading-form-info'>
+          <p style={{ fontSize: "2em" }}>The form is still loading. Please wait!</p>
+        </div>
+      )}
       {formFailed && <p>The form failed to load due to some third party cookie issues. Please enable cookies!</p>}
       <div ref={divContainerRef} id={SURVEY_DIV_CONTAINER} />
     </>

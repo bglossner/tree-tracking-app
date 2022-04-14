@@ -18,7 +18,7 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
   }
 
   return (
-    <main>
+    <main className="admin-verification">
       <h1>Hi there { userSession.username }</h1>
       <div>
         <h3>Important Links</h3>
@@ -32,6 +32,16 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
             <a rel="noreferrer" target="_blank" href="https://survey123.arcgis.com/surveys/205ff9bd93a549d7b9b525f7522bcf28/overview">Survey 123</a>
             &nbsp;&nbsp;
             <span>(Redesign survey and viewing survey-specific data)</span>
+          </li>
+          <li>
+            <a rel="noreferrer" target="_blank" href="https://survey123.arcgis.com/surveys/205ff9bd93a549d7b9b525f7522bcf28/overview">Survey 123</a>
+            &nbsp;&nbsp;
+            <span>(Redesign survey and viewing survey-specific data)</span>
+          </li>
+          <li>
+            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/home/item.html?id=2de8b29debfa4e9cab29794911ca7571#data">Data Table View</a>
+            &nbsp;&nbsp;
+            <span>(Cannot modify location)</span>
           </li>
         </ul>
       </div>
