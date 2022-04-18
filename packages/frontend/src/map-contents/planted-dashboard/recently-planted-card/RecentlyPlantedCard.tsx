@@ -1,9 +1,16 @@
+import { Typography } from '@mui/material';
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent';
-import './PlantedDash.scss'
+import './RecentlyPlantedCard.scss'
 
 export const RecentlyPlantedCard = () => {
   return (
-      <Card sx={{ color: 'black', width: '35vw', height: '75%' }} raised={true} />
+      <Card>
+        <CardContent>
+          <Typography variant='h5' >
+            Quercus Agrofolia
+          </Typography>
+        </CardContent>
+      </Card>
   );
 }

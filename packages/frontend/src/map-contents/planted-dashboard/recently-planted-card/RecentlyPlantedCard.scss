@@ -1,0 +1,8 @@
+.card-holder .MuiCard-root {
+  --extra-width: 2vw;
+	border-radius: 1em;
+  color: black; 
+  width: calc(100% + var(--extra-width));
+  height: 10vh;
+  transform: translateX(calc((var(--extra-width) / 2) * -1));
+}
