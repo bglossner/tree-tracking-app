@@ -9,7 +9,7 @@ export const PlantedDashboard = () => {
   const COUNT_UP_DURATION = 2;
 
   return (
-    <div>
+    <div className="planted-dashboard">
       <CountUp className='map-counter' delay={DELAY} end={currentPlanted} duration={COUNT_UP_DURATION} separator=',' useEasing={true}/>&nbsp;&nbsp;
       <p className='trees-planted-label'>Trees Planted</p>
       <div className='dashboard'>

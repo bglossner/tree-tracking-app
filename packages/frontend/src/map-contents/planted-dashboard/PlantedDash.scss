@@ -1,17 +1,20 @@
-.dashboard {
-	// margin-left: 10vh;
-  margin: 2vh 10vh 0 10vh;
-  border: 0.75vw solid #2d2d2d;
-  border-radius: 1vw;
-  width: 30vw;
-  height: 75vh;
-}
+.planted-dashboard {
 
-.map-counter {
-  font-size: 10vh;
-  font-weight: 700;
-}
+  .dashboard {
+    // margin-left: 10vh;
+    margin: 2vh 10vh 0 10vh;
+    border: 0.75vw solid #2d2d2d;
+    border-radius: 1vw;
+    width: 30vw;
+    height: 75vh;
+  }
 
-.trees-planted-label {
-  display: inline;
+  .map-counter {
+    font-size: 10vh;
+    font-weight: 700;
+  }
+
+  .trees-planted-label {
+    display: inline;
+  }
 }
