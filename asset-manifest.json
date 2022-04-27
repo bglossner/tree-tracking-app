@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/tree-tracking-app/static/css/main.3a82fe49.css",
+    "main.js": "/tree-tracking-app/static/js/main.10455d07.js",
+    "static/js/787.f912095b.chunk.js": "/tree-tracking-app/static/js/787.f912095b.chunk.js",
+    "static/media/green-slo-450-darkened-3.png": "/tree-tracking-app/static/media/green-slo-450-darkened-3.038cc963a457df029c4e.png",
+    "static/media/city-of-slo-logo.png": "/tree-tracking-app/static/media/city-of-slo-logo.5946191060a420149cd1.png",
+    "static/media/Shizuru-Regular.ttf": "/tree-tracking-app/static/media/Shizuru-Regular.c8175f8e5243b049a6d2.ttf",
+    "static/media/Shizuru-Regular.woff": "/tree-tracking-app/static/media/Shizuru-Regular.b9aa91f74e0113d8b477.woff",
+    "static/media/OpenSans-Regular.ttf": "/tree-tracking-app/static/media/OpenSans-Regular.e9f81a1f4e78dea52208.ttf",
+    "static/media/ecoslo-logo.png": "/tree-tracking-app/static/media/ecoslo-logo.06f5225db025ebefdb00.png",
+    "static/media/calpoly-logo.png": "/tree-tracking-app/static/media/calpoly-logo.039b14eb82370ded44c5.png",
+    "static/media/OpenSans-Regular.woff": "/tree-tracking-app/static/media/OpenSans-Regular.20434f184d261c7abe57.woff",
+    "static/media/rotary-club-logo.png": "/tree-tracking-app/static/media/rotary-club-logo.774139072df97814fba6.png",
+    "static/media/calfire-logo.png": "/tree-tracking-app/static/media/calfire-logo.7c2545b46d2806748ad6.png",
+    "static/media/forest-service.png": "/tree-tracking-app/static/media/forest-service.032673cdd2cd9cd06e7d.png",
+    "static/media/tree-outline-fill-green.svg": "/tree-tracking-app/static/media/tree-outline-fill-green.cc9672d5cb1516da9084baa5a1042854.svg",
+    "static/media/tree-outline.svg": "/tree-tracking-app/static/media/tree-outline.2028cf5389c369ec997d47f138b62722.svg",
+    "index.html": "/tree-tracking-app/index.html",
+    "main.3a82fe49.css.map": "/tree-tracking-app/static/css/main.3a82fe49.css.map",
+    "main.10455d07.js.map": "/tree-tracking-app/static/js/main.10455d07.js.map",
+    "787.f912095b.chunk.js.map": "/tree-tracking-app/static/js/787.f912095b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a82fe49.css",
+    "static/js/main.10455d07.js"
+  ]
+}
