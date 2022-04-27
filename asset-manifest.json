@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tree-tracking-app/static/css/main.3a82fe49.css",
-    "main.js": "/tree-tracking-app/static/js/main.10455d07.js",
+    "main.js": "/tree-tracking-app/static/js/main.6d2b37d0.js",
     "static/js/787.f912095b.chunk.js": "/tree-tracking-app/static/js/787.f912095b.chunk.js",
     "static/media/green-slo-450-darkened-3.png": "/tree-tracking-app/static/media/green-slo-450-darkened-3.038cc963a457df029c4e.png",
     "static/media/city-of-slo-logo.png": "/tree-tracking-app/static/media/city-of-slo-logo.5946191060a420149cd1.png",
@@ -18,11 +18,11 @@
     "static/media/tree-outline.svg": "/tree-tracking-app/static/media/tree-outline.2028cf5389c369ec997d47f138b62722.svg",
     "index.html": "/tree-tracking-app/index.html",
     "main.3a82fe49.css.map": "/tree-tracking-app/static/css/main.3a82fe49.css.map",
-    "main.10455d07.js.map": "/tree-tracking-app/static/js/main.10455d07.js.map",
+    "main.6d2b37d0.js.map": "/tree-tracking-app/static/js/main.6d2b37d0.js.map",
     "787.f912095b.chunk.js.map": "/tree-tracking-app/static/js/787.f912095b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3a82fe49.css",
-    "static/js/main.10455d07.js"
+    "static/js/main.6d2b37d0.js"
   ]
 }
