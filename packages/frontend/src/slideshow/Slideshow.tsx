@@ -1,6 +1,12 @@
 import { useEffect } from 'react';
 import { BasicTextSlideView } from './basic-text-slideview/BasicTextSlideView';
 import { PartnersSlide } from './logo-slideview/PartnersSlide';
+
+import slide1Src from '../assets/images/slideshow/slide1.png';
+import slide2Src from '../assets/images/slideshow/slide2.png';
+import slide3Src from '../assets/images/slideshow/slide3.png';
+import slide4Src from '../assets/images/slideshow/slide4.png';
+
 import './Slideshow.scss';
 
 /* Define abstract slide */
@@ -17,7 +23,7 @@ const slideList: ISlide[] = [
       <BasicTextSlideView
         text="As part of San Luis Obispo's initiative to be Carbon Neutral by 2023, we are collectively planting 10,000 trees by 2035."
       />),
-    imageSrc: "/images/slide1.png",
+    imageSrc: slide1Src,
     labelText: "MISSION"
   },
   {
@@ -26,7 +32,7 @@ const slideList: ISlide[] = [
         text="Want to plant a tree but don't know how? Don't worry! We have all the resources for you to have a successful planting experience."
       />
     ),
-    imageSrc: "/images/slide2.png",
+    imageSrc: slide2Src,
     labelText: "HOW TO PLANT"
   },
   {
@@ -35,14 +41,14 @@ const slideList: ISlide[] = [
         text="Not comfortable with planting your own tree? Sign up to adopt a tree! By adopting, you will take care of the tree you sign-up for by watering and more. We appreciate your help!"
       />
     ),
-    imageSrc: "/images/slide3.png",
+    imageSrc: slide3Src,
     labelText: "ADOPTING A TREE"
   },
   {
     slideView: (
       <PartnersSlide />
     ),
-    imageSrc: "/images/slide4raw.png",
+    imageSrc: slide4Src,
     labelText: "OUR PARTNERS"
   }
 ];
