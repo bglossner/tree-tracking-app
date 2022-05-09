@@ -10,7 +10,7 @@ export const MapContent = () => {
   useEffect(() => {
     queryFeatures({
       url: PUBLIC_VIEW_URL,
-      resultRecordCount: 1,
+      resultRecordCount: 5,
       orderByFields: "objectid DESC",
     }).then(x => {
       console.log(x);

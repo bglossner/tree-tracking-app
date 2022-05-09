@@ -1,8 +1,73 @@
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 .card-holder .MuiCard-root {
-  --extra-width: 2vw;
-	border-radius: 1em;
+  --extra-width: 1vw;
+  --border-radius: 1em;
+
+	border-radius: var(--border-radius);
   color: black; 
   width: calc(100% + var(--extra-width));
   height: 10vh;
-  transform: translateX(calc((var(--extra-width) / 2) * -1));
+  transform: translateX(calc(var(--extra-width) * -1));
+  padding: 0;
+
+  .MuiCardContent-root {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 2fr 6fr 3fr;
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+    place-content: center;
+    place-items: center center;
+  }
+
+  .recently-planted-img {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+  }
+
+  .recently-planted-left {
+    justify-self: start;
+    margin-left: 0.5em;
+    font-size: 1.25em;
+    align-self:center;
+  }
+
+  .recently-planted-right {
+    font-size: 0.8em;
+    justify-self: end;
+    margin-right: 0.5em;
+  }
+
+  .recently-planted-tree-number {
+    grid-column: 2;
+    grid-row: 1 / 2;
+    font-weight: bold;
+    margin-top: 0.25em;
+  }
+
+  .recently-planted-tree-species {
+    grid-column: 2;
+    grid-row: 2 / 3;
+  }
+
+  .recently-planted-tree-date {
+    grid-column: 3;
+    grid-row: 1 / 2;
+    align-self: end;
+  }
+
+  .recently-planted-tree-name {
+    grid-column: 3;
+    grid-row: 2 / 3;
+    margin-right: 0.27em;
+  }
+
+  .MuiTypography-root {
+    font-family: inherit;
+  }
 }

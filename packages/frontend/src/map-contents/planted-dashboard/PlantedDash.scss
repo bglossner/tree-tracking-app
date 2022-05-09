@@ -1,20 +1,43 @@
 .card-holder {
-	margin-left: 10vh;
-  margin: 2vh 10vh 0 10vh;
-  border: 0.75vw solid #2d2d2d;
-  border-radius: 1vw;
   width: 30vw;
-  height: 75vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
 
 .map-counter {
-  font-size: 10vh;
+  font-size: 1em;
   font-weight: 700;
 }
 
+.map-number-of-trees {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+}
+
 .trees-planted-label {
-  display: inline;
+  margin: 0;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 30vw;
+
+}
+
+.dashboard-outline {
+  border: 0.35vw solid #2d2d2d;
+  border-radius: 1vw;
+  width: 30vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: space-around;
 }
