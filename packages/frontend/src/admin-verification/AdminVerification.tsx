@@ -28,7 +28,7 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
         <h3>Important Links</h3>
         <ul>
           <li>
-            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/apps/View/index.html?appid=75ccf932728a4cb19fdb0c26a3d59868">Editing Map</a>
+            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/apps/View/index.html?appid=7f245b6aca674c88bfc0e5195b0131c6">Editing Map</a>
             &nbsp;&nbsp;
             <span>(Verify and change data)</span>
           </li>
@@ -38,7 +38,7 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
             <span>(Redesign survey and viewing survey-specific data)</span>
           </li>
           <li>
-            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/home/item.html?id=a2bef6f1cd634c2abc51de43a008ea0e#data">Data Table View</a>
+            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/home/item.html?id=2de8b29debfa4e9cab29794911ca7571#data">Data Table View</a>
             &nbsp;&nbsp;
             <span>(Cannot modify location)</span>
           </li>
