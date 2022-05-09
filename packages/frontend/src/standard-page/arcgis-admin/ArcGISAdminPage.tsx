@@ -1,13 +1,14 @@
-import { UserSession, IOAuth2Options } from "@esri/arcgis-rest-auth";
-import { getLayer } from "@esri/arcgis-rest-feature-layer";
+import { UserSession } from "@esri/arcgis-rest-auth";
 import { useState, useEffect } from "react";
+import { CLIENT_ID } from "../../constants/ArcGIS";
 import { Footer } from "../../footer/Footer";
 import { Header, ILinkComponentProps, INavLinkInfo } from "../../header/Header";
 import {
   checkIfExistingUserSession,
   parseAuthOutOfURL,
   updateSessionInfo,
-  signIn
+  signIn,
+  hasAppAccess
 } from "./arcgis-auth-interface";
 import { ArcGISSignIn } from "./arcgis-signin/ArcGISSignIn";
 import styles from './ArcGISAdminPage.module.scss';
@@ -25,9 +26,6 @@ interface IAdditionalButtonProps {
 interface INavLinkOverrideProps extends INavLinkInfo<ILinkComponentOverrideProps>, IAdditionalButtonProps {};
 
 interface ILinkComponentOverrideProps extends ILinkComponentProps, IAdditionalButtonProps {};
-
-/* interface IUserSessionError {
-}; */
 
 type IUserSessionError = boolean;
 
@@ -66,7 +64,15 @@ export const ArcGISAdminPage = ({ component: Component, useTopPadding }: IProps)
   const [userSession, setUserSession] = useState<UserSession | null>(checkIfExistingUserSession);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const adminPageNavbarLinks: INavLinkOverrideProps[] = [];
+  const adminPageNavbarLinks: INavLinkOverrideProps[] = [
+    {
+      to: '/',
+      shouldUnderline: false,
+      innerText: 'Home',
+      buttonText: '',
+      onClick: () => null,
+    }
+  ];
 
   if (userSession) {
     if (userSession && !loading) {
@@ -81,7 +87,17 @@ export const ArcGISAdminPage = ({ component: Component, useTopPadding }: IProps)
     }
   }
 
-  // check with validateAppAccess
+  useEffect(() => {
+    if (userSession) {
+      hasAppAccess(CLIENT_ID, userSession)
+        .then((hasAccess) => {
+          setError(hasAccess);
+        })
+        .catch((e) => {
+          setError(true);
+        })
+    }
+  }, [userSession]);
 
   useEffect(() => {
     if (parseAuthOutOfURL()) {

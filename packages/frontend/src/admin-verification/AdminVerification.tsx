@@ -1,42 +1,11 @@
-import { getLayer, queryFeatures, queryRelated } from "@esri/arcgis-rest-feature-layer";
-import { useEffect, useState } from "react";
-import { VERIFICATION_VIEW_URL } from "../constants/ArcGIS";
 import { IUserSessionInfo } from "../standard-page/arcgis-admin/ArcGISAdminPage";
-import { getTreesNotInVerifiedTable } from "./update-verification-table/helpers";
+import './AdminVerification.scss';
 
 interface IProps extends IUserSessionInfo {};
 
-export interface ITreeRecord {
-
-};
-
 export function AdminVerification({ error, userSession, loading }: IProps) {
-  const [unverifiedRecords, setUnverifiedRecords] = useState<ITreeRecord[]>([]);
-  const [loadingRecords, setLoadingRecords] = useState(true);
-  
-  useEffect(() => {
-    if (userSession) {
-      queryFeatures({
-        url: VERIFICATION_VIEW_URL,
-        outFields: ["globalid"],
-        authentication: userSession,
-      }).then((x: any) => {
-        console.log(x);
-      });
-
-      // queryFeatures({
-      //   url: featureServerUrl,
-      //   where: "globalid not in ('1', '2')",
-      //   authentication: userSession,
-      // }).then(x => {
-      //   console.log(x);
-      // })
-      getTreesNotInVerifiedTable(userSession);
-    }
-  }, [userSession]);
-
   if (error) {
-    return <p>An error occurred while loading the page</p>;
+    return <p>An error occurred while loading your ArcGIS profile. Are you sure you have access to this page?</p>;
   }
 
   if (loading) {
@@ -49,6 +18,33 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
   }
 
   return (
-    <p>Successfully loaded user: { userSession.username } with password { userSession.password } </p>
+    <main className="admin-verification">
+      <h1>Hi there { userSession.username }</h1>
+      <div>
+        <h3>Important Links</h3>
+        <ul>
+          <li>
+            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/apps/View/index.html?appid=7f245b6aca674c88bfc0e5195b0131c6">Editing Map</a>
+            &nbsp;&nbsp;
+            <span>(Verify and change data)</span>
+          </li>
+          <li>
+            <a rel="noreferrer" target="_blank" href="https://survey123.arcgis.com/surveys/205ff9bd93a549d7b9b525f7522bcf28/overview">Survey 123</a>
+            &nbsp;&nbsp;
+            <span>(Redesign survey and viewing survey-specific data)</span>
+          </li>
+          <li>
+            <a rel="noreferrer" target="_blank" href="https://survey123.arcgis.com/surveys/205ff9bd93a549d7b9b525f7522bcf28/overview">Survey 123</a>
+            &nbsp;&nbsp;
+            <span>(Redesign survey and viewing survey-specific data)</span>
+          </li>
+          <li>
+            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/home/item.html?id=2de8b29debfa4e9cab29794911ca7571#data">Data Table View</a>
+            &nbsp;&nbsp;
+            <span>(Cannot modify location)</span>
+          </li>
+        </ul>
+      </div>
+    </main>
   );
 }

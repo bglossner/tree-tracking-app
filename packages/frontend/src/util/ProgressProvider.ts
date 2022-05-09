@@ -15,7 +15,6 @@ const ProgressProvider = ({ valueStart, valueEnd, delay, children }: IProps) => 
 
     if (delay) {
       timeout = setTimeout(() => {
-        console.log('timeout done');
         setValue(valueEnd);
       }, delay * 1000);
     } else {

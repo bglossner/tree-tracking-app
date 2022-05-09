@@ -1,4 +1,4 @@
-import { IOAuth2Options, UserSession } from "@esri/arcgis-rest-auth";
+import { IOAuth2Options, UserSession, validateAppAccess } from "@esri/arcgis-rest-auth";
 import { CLIENT_ID as clientId } from "../../constants/ArcGIS";
 
 interface ILocationState {
@@ -28,6 +28,18 @@ export function checkIfExistingUserSession(): UserSession | null {
   }
 
   return null;
+}
+
+export async function hasAppAccess(clientId: string, userSession: UserSession): Promise<boolean> {
+  try {
+    const { valid } = await validateAppAccess(userSession.token, clientId);
+
+    return valid;
+  } catch (e) {
+    console.error('App access validate error!');
+    console.log(e);
+    return false;
+  }
 }
 
 export function updateSessionInfo(session?: UserSession) {
