@@ -5,8 +5,6 @@ interface ILocationState {
   accessToken: string;
 }
 
-const redirectUri = encodeURIComponent('http://localhost:3000/arcgis-redirect');
-
 export function getPopupWindowFeatures(w: number, h: number): string | null {
   // centers popup
   if (!window.top) {
@@ -51,9 +49,14 @@ export function updateSessionInfo(session?: UserSession) {
 }
 
 export function defaultOAuthOptions(): IOAuth2Options {
+  // ArcGIS is dumb so with Hash routing it thinks the query string exists
+  const redirectUri = window.location.href.includes('?') ?
+    window.location.href :
+    window.location.href + '?1=1';
+
   return {
     clientId,
-    redirectUri: window.location.origin + window.location.pathname,
+    redirectUri,
     popup: true,
   };
 }
@@ -81,16 +84,12 @@ export function signIn(): Promise<UserSession> {
 
   return new Promise((resolve, reject) => {
     const ret = UserSession.beginOAuth2(oauth2Options)?.then((session) => {
-      console.log('DONE!');
-      console.log(session);
       updateSessionInfo(session);
       resolve(session);
     }).catch((e) => {
       reject(e);
     });
-  
-    console.log(ret);
-  
+    
     if (!ret) {
       reject(new Error('beginOAuth failed'));
     }

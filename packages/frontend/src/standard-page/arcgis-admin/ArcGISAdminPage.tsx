@@ -82,20 +82,22 @@ export const ArcGISAdminPage = ({ component: Component, useTopPadding }: IProps)
         innerText: '',
         componentType: ArcGISAdminButton,
         buttonText: 'Sign Out',
-        onClick: () => { updateSessionInfo(undefined); setUserSession(null); }
+        onClick: () => { updateSessionInfo(undefined); setUserSession(null); setError(false); }
       });
     }
   }
 
   useEffect(() => {
     if (userSession) {
-      hasAppAccess(CLIENT_ID, userSession)
-        .then((hasAccess) => {
-          setError(hasAccess);
-        })
-        .catch((e) => {
-          setError(true);
-        })
+      if (process.env.REACT_APP_CHECK_APP_ACCESS === 'true') {
+        hasAppAccess(CLIENT_ID, userSession)
+          .then((hasAccess) => {
+            setError(!hasAccess);
+          })
+          .catch((e) => {
+            setError(true);
+          });
+      }
     }
   }, [userSession]);
 
@@ -109,7 +111,7 @@ export const ArcGISAdminPage = ({ component: Component, useTopPadding }: IProps)
     <>
       <Header navbarLinks={adminPageNavbarLinks} />
       <div className={`standard-page ${useTopPadding ? 'standard-page-top-padding' : ''}`}>
-        {!loading && !userSession ?
+        {!loading && !userSession && !error ?
             <ArcGISSignIn onSignInClicked={onSignInClickedWrapper(setUserSession, setError, setLoading)} />
           :
             <Component loading={loading} userSession={userSession} error={error} />

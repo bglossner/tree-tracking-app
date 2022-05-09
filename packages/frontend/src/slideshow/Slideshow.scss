@@ -18,36 +18,27 @@
   font-display: swap;
 }
 
+$slideshow-height: 80vh;
+
 .slideshow {
   // box-sizing: border-box;
   // max-width: 100%;
-  width: 100%;
+  width: 90%;
+  height: $slideshow-height;
   position: relative;
   margin: auto;
 
   /* Container for slide image and text */
   .slide {
     display: none;
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-family: 'Open Sans', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: left;
 
-    /* Caption text */
-    .text {
-      padding: 8px 12px;
-      position: absolute;
-      bottom: 10%;
-      height: 27%;
-      letter-spacing: 0.15rem;
-      max-width: 100%;
-      font-weight: 700;
-
-      color: #f2f2f2;
-    }
-
     /* Background image */
-    img {
+    img.bg-image {
       width: 100%;
+      height: $slideshow-height;
       vertical-align: middle;
     }
 
@@ -84,7 +75,7 @@
   .dotContainer {
     padding: 8px 12px;
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     width: 100%;
     text-align: center;
 
@@ -118,8 +109,8 @@
 
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     width: auto;
-    margin-top: -6%; // Pull button higher
     //padding: 1rem 3px 2rem 3px;
     padding: 0rem 1rem;
 
