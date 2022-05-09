@@ -18,3 +18,12 @@ main.admin-verification {
     }
   }
 }
+
+.error-div {
+  display: grid;
+  place-items: center;
+  margin-top: 10vh;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 8vh;
+}

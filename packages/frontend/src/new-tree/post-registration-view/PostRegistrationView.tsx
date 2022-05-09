@@ -1,3 +1,4 @@
+import { Card } from '@mui/material';
 import { HashLink } from 'react-router-hash-link';
 import { TreeCircle } from '../../circle-progress-with-tree/TreeCircle';
 import './PostRegistrationView.scss';
@@ -11,21 +12,31 @@ interface IProps {
 export const PostRegistrationView = ({ treeNumber, submitAnotherTree }: IProps) => {
   return (
     <main id="post-reg-view">
-      <h2>You just planted tree<br /><span className="tree-number"># {treeNumber}</span></h2>
-      <div className="tree-circle-container">
-        <TreeCircle
-          delay={0.25}
-          animationDuration={1.25}
-          ratio={1}
-          treeImageSrc={TreeImg}
-        />
-      </div>
-      <p>
-        Thank you for making our community more beautiful! Your tree has been recorded and is helping SLO become more carbon neutral!
-      </p>
-      <p style={{ fontSize: '1.25em' }}>
-        Remember to give your tree 5 gallons of water per week.
-      </p>
+      <section id="prv-card-container">
+        <Card sx={{
+          minWidth: '25vw',
+          height: '80%',
+          borderRadius: '20px',
+        }}>
+          <h2>You just planted tree<br /><span className="tree-number"># {treeNumber}</span></h2>
+          <div className="tree-circle-container">
+            <TreeCircle
+              delay={0.25}
+              animationDuration={1.25}
+              ratio={1}
+              treeImageSrc={TreeImg}
+            />
+          </div>
+        </Card>
+        <div id='prv-help'>
+          <p className='prv-help-text'>
+            Thank you for making our community more beautiful! Your tree has been recorded and is helping SLO become more carbon neutral!
+          </p>
+          <p className='prv-help-text'>
+            Remember to give your tree 5 gallons of water per week.
+          </p>
+        </div>
+      </section>
       <div className='post-reg-actions'>
         <HashLink
           to={`/?treeNumber=${treeNumber}#Map`}

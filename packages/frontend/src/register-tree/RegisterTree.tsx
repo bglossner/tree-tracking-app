@@ -3,6 +3,7 @@ import CountUp from 'react-countup';
 import { Col, Container, Row } from 'react-bootstrap';
 import { TreeCircle } from '../circle-progress-with-tree/TreeCircle';
 import TreeOutline from '../assets/tree-outline.svg';
+import { Link } from 'react-router-dom';
 
 const COUNT_UP_DURATION = 2;
 const PATH_DURATION = COUNT_UP_DURATION;
@@ -35,7 +36,7 @@ export const RegisterTree = () => {
         <p>{TOTAL_TREES_WANTED / 2} trees</p>
       </div>
       <div className='tree-action-btns-container'>
-        <a href='/new-tree' className='tree-action'>Register a Tree</a>
+        <Link to='/new-tree' className='tree-action'>Register a Tree</Link>
         {/* <a href='/adopt-tree' className='tree-action'>Adopt a Tree</a> */}
       </div>
     </div>
