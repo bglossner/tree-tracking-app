@@ -3,6 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const PlantPage = () => {
 
@@ -47,7 +48,7 @@ export const PlantPage = () => {
         },
         {
           label: "How does water conservation relate to this program, given that we are perpetually in drought and always being asked to conserve water?",
-          content: (<p>We encourage you to plant drought tolerant trees that can survive through dry hot weather.  Planting very water demanding trees is great for some situations, but not for most street trees.  Drought tolerant trees can be searched on <a href="https://selectree.calpoly.edu">SelecTree</a></p>)
+          content: (<p>We encourage you to plant drought tolerant trees that can survive through dry hot weather.  Planting very water demanding trees is great for some situations, but not for most street trees.  Drought tolerant trees can be searched on <a href="https://selectree.calpoly.edu">SelecTree</a>.</p>)
         }
       ]
     },
@@ -91,7 +92,7 @@ export const PlantPage = () => {
               <div className='accordion-menu'>
                 <Accordion>
                   <AccordionSummary
-                    //expandIcon={<ExpandMoreIcon />}
+                    expandIcon={<ExpandMoreIcon />}
                     aria-controls={"panel"+index+"-content"}
                     id={"panel"+index+"-header"}
                     className='accordion-label'
