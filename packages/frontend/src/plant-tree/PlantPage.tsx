@@ -12,7 +12,7 @@ export const PlantPage = () => {
   const stringToElement = (string: string) => (<p>{string}</p>);
   
   /* Hook for expanding FAQ accordions */
-  const [accordionMap, setAccordionMap] = React.useState(new Map());
+  const [accordionMap, setAccordionMap] = React.useState(new Map<string, boolean>());
 
   /* Change the expanded value of an accordion. The label is made from the 
      accordion section heading + the index of the accordion element. */
@@ -27,7 +27,7 @@ export const PlantPage = () => {
   /* When the expand/close button is pressed, if all accordions are open, then
      close them all. Otherwise, open all the accordions. Should only be called
      after map is initialized. */
-  const expandAction = () => {
+  const handleExpandButton = () => (event: React.SyntheticEvent) => {
     // Create a working copy of the map
     var newMap = new Map(accordionMap);
 
@@ -117,20 +117,26 @@ export const PlantPage = () => {
   ];
 
   /* Initialize the accordion map, so all are closed by default */
-  accordionList.map(({heading, items}) => {
-    items.map((item, index) => {
-      // Copy map and update
-      var newMap = new Map(accordionMap);
-      newMap.set(heading+index, false);
-      setAccordionMap(newMap);
-    })
-  });
+  React.useEffect(() => {
+    // Make a working copy of the map
+    var newMap = new Map(accordionMap);
+    // Set all to closed
+    accordionList.forEach(({heading, items}) => {
+      items.forEach((item, index) => {
+        newMap.set(heading+index, false);
+      })
+    });
+    // Update map
+    setAccordionMap(newMap);
+  }, []);
 
   /* Assemble page */
 	return (
       <div className="plant-tree">
         <p>Never planted a tree before? No worries! We have all the resources for you to get started.</p>
-        
+        <button type='button' onClick={handleExpandButton()}>
+          <p>Expand/Close all</p>
+        </button>
         <div className="accordion-container">
         {
         /* Create accordion menus from list */
@@ -142,7 +148,10 @@ export const PlantPage = () => {
             {/* List out accordion menus */}
             {items.map(({label, content}, index) => (
               <div className='accordion-menu'>
-                <Accordion>
+                <Accordion 
+                  expanded={accordionMap.get(heading+index) === true} 
+                  onChange={handleChange(heading+index)}
+                  >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls={"panel"+index+"-content"}
