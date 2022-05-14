@@ -4,24 +4,65 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React from 'react';
 
 export const PlantPage = () => {
 
+  /* Helper function for converting strings to paragraph elements */
   const stringToElement = (string: string) => (<p>{string}</p>);
+  
+  /* Hook for expanding FAQ accordions */
+  const [accordionMap, setAccordionMap] = React.useState(new Map());
 
-  let lorem_ipsum_str = "Lorem ipsum dolor sit amet. Sit quia et facere aut perspiciatis. Eveniet quia minima dignissimos voluptatibus voluptatem itaque. Modi natus excepturi debitis suscipit sed quisquam aspernatur. Numquam ea quia reiciendis. Suscipit dolorum reprehenderit totam sed quia. Rerum rerum doloribus optio. Id fuga explicabo sed ea non consequatur minus. Maxime reprehenderit ea nihil.";
-  let lorem_ipsum = stringToElement(lorem_ipsum_str);
+  /* Change the expanded value of an accordion. The label is made from the 
+     accordion section heading + the index of the accordion element. */
+  const handleChange =
+    (label: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      // Copy map and update
+      var newMap = new Map(accordionMap);
+      newMap.set(label, isExpanded);
+      setAccordionMap(newMap);
+    };
+  
+  /* When the expand/close button is pressed, if all accordions are open, then
+     close them all. Otherwise, open all the accordions. Should only be called
+     after map is initialized. */
+  const expandAction = () => {
+    // Create a working copy of the map
+    var newMap = new Map(accordionMap);
 
+    // Check if any accordions are closed
+    var anyClosed = false;
+    newMap.forEach((expanded, key) => {
+      if (!expanded) anyClosed = true;
+    });
+
+    // Expand or close all entries in the map
+    newMap.forEach((value, key) => {
+      if (anyClosed) {
+        newMap.set(key, true);
+      } else {
+        newMap.set(key, false);
+      }
+    });
+
+    // Update map
+    setAccordionMap(newMap);
+  };
+
+  /* Interface for data in an accordion */
   interface IAccordionData {
     label: string,
     content: JSX.Element
   };
 
+  /* Interface for a section of accordions */
   interface IAccordionSection {
     heading: string,
     items: IAccordionData[]
   }
 
+  /* List of all accordion sections, and their contents */
   const accordionList: IAccordionSection[] = [
     {
       heading: "Getting Started",
@@ -75,6 +116,17 @@ export const PlantPage = () => {
     }
   ];
 
+  /* Initialize the accordion map, so all are closed by default */
+  accordionList.map(({heading, items}) => {
+    items.map((item, index) => {
+      // Copy map and update
+      var newMap = new Map(accordionMap);
+      newMap.set(heading+index, false);
+      setAccordionMap(newMap);
+    })
+  });
+
+  /* Assemble page */
 	return (
       <div className="plant-tree">
         <p>Never planted a tree before? No worries! We have all the resources for you to get started.</p>
