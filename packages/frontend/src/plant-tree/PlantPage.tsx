@@ -24,6 +24,18 @@ export const PlantPage = () => {
       setAccordionMap(newMap);
     };
   
+  /* Helper function that returns true is any accordion menu in the
+     given map is closed. */
+  const anyAccordionClosed = 
+  (map: Map<string, boolean>) => {
+    // Check if any accordions are closed
+    var anyClosed = false;
+    map.forEach((expanded, key) => {
+      if (!expanded) anyClosed = true;
+    });
+    return anyClosed;
+  };
+
   /* When the expand/close button is pressed, if all accordions are open, then
      close them all. Otherwise, open all the accordions. Should only be called
      after map is initialized. */
@@ -32,10 +44,7 @@ export const PlantPage = () => {
     var newMap = new Map(accordionMap);
 
     // Check if any accordions are closed
-    var anyClosed = false;
-    newMap.forEach((expanded, key) => {
-      if (!expanded) anyClosed = true;
-    });
+    var anyClosed = anyAccordionClosed(newMap);
 
     // Expand or close all entries in the map
     newMap.forEach((value, key) => {
@@ -135,7 +144,7 @@ export const PlantPage = () => {
       <div className="plant-tree">
         <p>Never planted a tree before? No worries! We have all the resources for you to get started.</p>
         <button type='button' onClick={handleExpandButton()}>
-          <p>Expand/Close all</p>
+          <p>{anyAccordionClosed(accordionMap) ? "Expand" : "Close"} All</p>
         </button>
         <div className="accordion-container">
         {
