@@ -5,24 +5,20 @@ import './map-content.scss';
 import { MapSLO } from './Map/MapSLO';
 import { PlantedDashboard } from './planted-dashboard/PlantedDash';
 
-export const MapContent = () => {
+interface IProps {
+  currentPlanted: number;
+}
+
+export const MapContent = ({ currentPlanted }: IProps) => {
 
   useEffect(() => {
-    queryFeatures({
-      url: PUBLIC_VIEW_URL,
-      resultRecordCount: 1,
-      orderByFields: "objectid DESC",
-    }).then(x => {
-      console.log(x);
-    })
-
-    fetch(`${PUBLIC_VIEW_URL}/queryAttachments?f=json`)
+    // fetch(`${PUBLIC_VIEW_URL}/queryAttachments?f=json`);
   }, []);
 
   return (
     <div className="MapContent">
       <MapSLO />
-      <PlantedDashboard />
+      <PlantedDashboard currentPlanted={currentPlanted} />
     </div>
   );
 };

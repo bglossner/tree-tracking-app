@@ -3,8 +3,11 @@ import CardContent from '@mui/material/CardContent';
 import './PlantedDash.scss';
 import CountUp from 'react-countup';
 
-export const PlantedDashboard = () => {
-  const currentPlanted = 2124;
+interface IProps {
+  currentPlanted: number;
+}
+
+export const PlantedDashboard = ({ currentPlanted }: IProps) => {
   const DELAY = 0.1;
   const COUNT_UP_DURATION = 2;
 
