@@ -1,0 +1,12 @@
+@use '../../global-styles.scss';
+@use '../../global-variables' as gv;
+
+.navbarBtn {
+  @extend .btnTree;
+
+  background-color: gv.$green;
+  color: gv.$bkg-color;
+  padding: 10% 20%;
+  width: fit-content;
+  border-radius: 10px;
+}

@@ -1,0 +1,29 @@
+main.admin-verification {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  align-items: center;
+
+  h1 {
+    margin: 0 auto;
+    margin-bottom: 3vh;
+  }
+
+  ul {
+    text-align: left;
+    margin-top: 3vh;
+
+    li {
+      margin-top: 2vh;
+    }
+  }
+}
+
+.error-div {
+  display: grid;
+  place-items: center;
+  margin-top: 10vh;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 8vh;
+}

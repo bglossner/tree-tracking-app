@@ -9,40 +9,26 @@ const ACTIVE_STYLE: CSSProperties = {
   textUnderlineOffset: "2vh",
 };
 
-interface INavLinkInfo {
+export interface ILinkComponentProps {
   to: To;
-  innerText: string;
+  smooth?: boolean;
+  style?: React.CSSProperties | ((props: {
+      isActive: boolean;
+  }) => React.CSSProperties);
 };
 
-const HomeNavLinks: INavLinkInfo[] = [
-  {
-    to: "/#top",
-    innerText: "Register a Tree",
-  },
-  {
-    to: {
-      hash: "Plant",
-      pathname: "/",
-    },
-    innerText: "Plant a Tree",
-  },
-  {
-    to: {
-      hash: "About",
-      pathname: "/",
-    },
-    innerText: "About",
-  },
-  {
-    to: {
-      hash: "Map",
-      pathname: "/",
-    },
-    innerText: "Map",
-  },
-];
+export interface INavLinkInfo<T extends ILinkComponentProps> {
+  to: To;
+  innerText?: string;
+  shouldUnderline?: boolean;
+  componentType?: React.FC<T>;
+};
 
-export const Header = () => {
+interface IProps<T extends ILinkComponentProps> {
+  navbarLinks: INavLinkInfo<T>[];
+}
+
+export const Header = ({ navbarLinks }: IProps<any>) => {
   const location = useLocation();
 
   const isActiveDecider = (activeByPath: boolean, to: To): CSSProperties => {
@@ -73,18 +59,23 @@ export const Header = () => {
         <img alt="UFEI Logo" src={ufeiLogo} />
       </a>
       <nav>
-        {HomeNavLinks.map(({ to, innerText }) => (
-          <div className="nav-link-container">
-            <NavHashLink
-              to={to}
-              smooth
-              key={innerText}
-              style={({ isActive }) => isActiveDecider(isActive, to)}
-            >
-              &nbsp;&nbsp;&nbsp;{innerText}&nbsp;&nbsp;&nbsp;
-            </NavHashLink>
-          </div>
-        ))}
+        {navbarLinks.map(({ to, innerText, componentType, shouldUnderline, ...rest }) => {
+          const LinkType = componentType ?? NavHashLink; 
+
+          return (
+            <div className="nav-link-container">
+              <LinkType
+                to={to}
+                smooth
+                key={innerText}
+                style={({ isActive }) => shouldUnderline ? isActiveDecider(isActive, to) : {}}
+                {...rest}
+              >
+                &nbsp;&nbsp;&nbsp;{innerText}&nbsp;&nbsp;&nbsp;
+              </LinkType>
+            </div>
+          );
+        })}
       </nav>
     </header>
   );

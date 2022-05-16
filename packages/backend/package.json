@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run dev",
+    "script-test": "ts-node scripts/arcgis-rest-request-test.ts",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts"
   },
   "repository": {
@@ -26,7 +27,12 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
+    "@esri/arcgis-rest-auth": "^3.4.3",
+    "@esri/arcgis-rest-feature-layer": "^3.4.3",
+    "@esri/arcgis-rest-request": "^3.4.3",
     "dotenv": "^10.0.0",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "isomorphic-form-data": "^2.0.0",
+    "node-fetch": "^2.6.7"
   }
 }
