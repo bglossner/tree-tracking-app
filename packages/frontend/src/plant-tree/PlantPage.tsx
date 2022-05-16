@@ -76,6 +76,12 @@ const accordionList: IAccordionSection[] = [
         ),
       },
       {
+        label: "What do I do once I've planted my tree?",
+        content: stringToElement(
+          "Give your tree 5 gallons of water each week, then register the tree here to count it toward the city's goals."
+        ),
+      },
+      {
         label: "What kind of tree should I plant?",
         content: (
           <p>
