@@ -5,6 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
+import { Link } from 'react-router-dom';
 
 /* Interface for data in an accordion */
 interface IAccordionData {
@@ -77,8 +78,12 @@ const accordionList: IAccordionSection[] = [
       },
       {
         label: "What do I do once I've planted my tree?",
-        content: stringToElement(
-          "Give your tree 5 gallons of water each week, then register the tree here to count it toward the city's goals."
+        content: (
+          <p>
+            Give your tree 5 gallons of water each week, then register the tree{" "}
+            <Link to="/new-tree">here</Link>
+            {" "}to count it toward the city's goals.
+          </p>
         ),
       },
       {
