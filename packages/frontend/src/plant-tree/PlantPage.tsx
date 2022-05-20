@@ -5,7 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 /* Interface for data in an accordion */
 interface IAccordionData {
@@ -35,8 +35,8 @@ const accordionList: IAccordionSection[] = [
               "Urban forests are a form of “green infrastructure” that provide
               or contribute to numerous environmental and social benefits
               including air pollution removal, reduction of flooding and soil
-              erosion, noise reduction, wind protection, reduced energy use
-              via shading and cooling, wildlife habitat, carbon storage,
+              erosion, noise reduction, wind protection, reduced energy use via
+              shading and cooling, wildlife habitat, carbon storage,
               beautification, walkability, increased contentment and social
               interaction, crime reduction, and increased property values and
               retail business traffic. In addition, park and open space areas
@@ -49,17 +49,15 @@ const accordionList: IAccordionSection[] = [
               change, these benefits are now more important than ever before.
               Yet despite ever-growing recognition of these advantages, the
               United States is losing more and more urban tree cover with each
-              passing year, estimated at roughly 36 million trees lost
-              annually (Nowak and Greenfield, 2018). Planting and caring for
-              a tree is a rich and rewarded experience. Not only do you get to
-              see the tree grow and change over time, but you are giving a
-              gift to future generations who will benefit from that tree.
+              passing year, estimated at roughly 36 million trees lost annually
+              (Nowak and Greenfield, 2018). Planting and caring for a tree is a
+              rich and rewarded experience. Not only do you get to see the tree
+              grow and change over time, but you are giving a gift to future
+              generations who will benefit from that tree.
             </p>
             <p>
               Read more about the benefits of trees{" "}
-              <a href="https://canopy.org/tree-info/benefits-of-trees/">
-                here
-              </a>
+              <a href="https://canopy.org/tree-info/benefits-of-trees/">here</a>
               !
             </p>
           </div>
@@ -81,8 +79,8 @@ const accordionList: IAccordionSection[] = [
         content: (
           <p>
             Give your tree 5 gallons of water each week, then register the tree{" "}
-            <Link to="/new-tree">here</Link>
-            {" "}to count it toward the city's goals.
+            <Link to="/new-tree">here</Link> to count it toward the city's
+            goals.
           </p>
         ),
       },
@@ -92,10 +90,10 @@ const accordionList: IAccordionSection[] = [
           <p>
             You can plant any kind of tree. To select the species that best
             matches your site and desires, visit{" "}
-            <a href="https://selectree.calpoly.edu">SelecTree</a>. Rarely,
-            some trees become weedy and reproduce on their own and we don’t
-            recommend that you plant one of these trees. SelecTree will tell
-            you if your tree is weedy.
+            <a href="https://selectree.calpoly.edu">SelecTree</a>. Rarely, some
+            trees become weedy and reproduce on their own and we don’t recommend
+            that you plant one of these trees. SelecTree will tell you if your
+            tree is weedy.
           </p>
         ),
       },
@@ -132,8 +130,15 @@ const accordionList: IAccordionSection[] = [
     items: [
       {
         label: "Is the City giving away trees for free?",
-        content: stringToElement(
-          "Currently, there are no free tree give aways but you can puy a tree at any of our local nurseries.  Once you have the tree, read the How to Plant a tree link, plant your tree, and then register your tree."
+        content: (
+          <p>
+            Currently, there are no free tree give aways but you can buy a tree
+            at any of our local nurseries. Once you have the tree, read{" "}
+            <a href="https://canopy.org/tree-info/planting-trees/">
+              How to Plant a Tree
+            </a>
+            , plant your tree, and then register your tree.
+          </p>
         ),
       },
       {
@@ -142,10 +147,10 @@ const accordionList: IAccordionSection[] = [
         content: (
           <p>
             To have a healthy urban forest, we need everyone to pitch in. A
-            newly planted tree should get 5 gallons of water once a week. A
-            year worth of water will cost you less than $10. Part of being
-            part of the solution is watering your tree each week. For more
-            info on tree care, click{" "}
+            newly planted tree should get 5 gallons of water once a week. A year
+            worth of water will cost you less than $10. Part of being part of
+            the solution is watering your tree each week. For more info on tree
+            care, click{" "}
             <a href="https://canopy.org/tree-info/caring-for-trees/">here</a>.
           </p>
         ),
@@ -162,8 +167,8 @@ const accordionList: IAccordionSection[] = [
           "What if, for whatever reason, I want to remove my tree(s)? Will the City prevent me from doing that, or charge me/fine me if I do?",
         content: (
           <p>
-            The City does have a tree removal ordinance. More info about it
-            can be found{" "}
+            The City does have a tree removal ordinance. More info about it can
+            be found{" "}
             <a href="https://www.slocity.org/living/natural-resources/trees-and-urban-forestry">
               here
             </a>
@@ -185,7 +190,7 @@ const calcInitialAccordionMap = (): IFAQAccordionMap => {
   // Set all to closed
   accordionList.forEach(({ heading, items }) => {
     items.forEach((_item, index) => {
-      newMap[`${heading}${index}`] =  false;
+      newMap[`${heading}${index}`] = false;
     });
   });
 
@@ -194,7 +199,9 @@ const calcInitialAccordionMap = (): IFAQAccordionMap => {
 
 export const PlantPage = () => {
   /* Hook for expanding FAQ accordions */
-  const [accordionMap, setAccordionMap] = React.useState(calcInitialAccordionMap);
+  const [accordionMap, setAccordionMap] = React.useState(
+    calcInitialAccordionMap
+  );
 
   /* Change the expanded value of an accordion. The label is made from the 
      accordion section heading + the index of the accordion element. */
@@ -209,7 +216,7 @@ export const PlantPage = () => {
   /* Helper function that returns true is any accordion menu in the
      given map is closed. */
   const anyAccordionClosed = (map: IFAQAccordionMap) => {
-    return Object.values(map).some(v => !v);
+    return Object.values(map).some((v) => !v);
   };
 
   /* When the expand/close button is pressed, if all accordions are open, then
@@ -218,7 +225,7 @@ export const PlantPage = () => {
   const handleExpandButton = () => (event: React.SyntheticEvent) => {
     const anyClosed = anyAccordionClosed(accordionMap);
 
-    const accordionMapClone = {...accordionMap};
+    const accordionMapClone = { ...accordionMap };
 
     // Expand or close all entries in the map
     Object.entries(accordionMap).forEach(([key]) => {

@@ -1,6 +1,7 @@
 import { Card } from '@mui/material';
 import { HashLink } from 'react-router-hash-link';
 import { TreeCircle } from '../../circle-progress-with-tree/TreeCircle';
+import { TREE_NUMBER_QUERY_PARAM } from '../../map-contents/Map/MapSLO';
 import './PostRegistrationView.scss';
 import TreeImg from './tree-outline-fill-green.svg';
 
@@ -39,7 +40,7 @@ export const PostRegistrationView = ({ treeNumber, submitAnotherTree }: IProps) 
       </section>
       <div className='post-reg-actions'>
         <HashLink
-          to={`/?treeNumber=${treeNumber}#Map`}
+          to={`/?${TREE_NUMBER_QUERY_PARAM}=${treeNumber}#Map`}
           className="post-reg-button view-map-btn"
         >
           View on Map
