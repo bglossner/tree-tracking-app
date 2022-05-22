@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { BasicTextSlideView } from './basic-text-slideview/BasicTextSlideView';
 import { PartnersSlide } from './logo-slideview/PartnersSlide';
 
+// Only kept around original slides 1 & 4
 import slide1Src from '../assets/images/slideshow/slide1.png';
-import slide2Src from '../assets/images/slideshow/slide2.png';
-import slide3Src from '../assets/images/slideshow/slide3.png';
 import slide4Src from '../assets/images/slideshow/slide4.png';
 
 import './Slideshow.scss';
@@ -28,29 +27,11 @@ const slideList: ISlide[] = [
   },
   {
     slideView: (
-      <BasicTextSlideView
-        text="Want to plant a tree but don't know how? Don't worry! We have all the resources for you to have a successful planting experience."
-      />
-    ),
-    imageSrc: slide2Src,
-    labelText: "HOW TO PLANT"
-  },
-  {
-    slideView: (
-      <BasicTextSlideView
-        text="Not comfortable with planting your own tree? Sign up to adopt a tree! By adopting, you will take care of the tree you sign-up for by watering and more. We appreciate your help!"
-      />
-    ),
-    imageSrc: slide3Src,
-    labelText: "ADOPTING A TREE"
-  },
-  {
-    slideView: (
       <PartnersSlide />
     ),
     imageSrc: slide4Src,
     labelText: "OUR PARTNERS"
-  }
+  },
 ];
 
 /* Slideshow modified from https://www.w3schools.com/howto/howto_js_slideshow.asp */

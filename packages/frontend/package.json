@@ -6,6 +6,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.6.2",
     "@esri/arcgis-rest-auth": "^3.4.3",
     "@esri/arcgis-rest-feature-layer": "^3.4.3",
     "@mui/material": "^5.3.1",
@@ -35,7 +36,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "CI=false npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {

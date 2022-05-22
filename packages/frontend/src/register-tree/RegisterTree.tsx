@@ -11,9 +11,11 @@ const PATH_DURATION = COUNT_UP_DURATION;
 const TOTAL_TREES_WANTED = 10000;
 const DELAY = 0.5;
 
-export const RegisterTree = () => {
-  const currentPlanted = 2124;
+interface IProps {
+  currentPlanted: number;
+}
 
+export const RegisterTree = ({ currentPlanted }: IProps) => {
   return (
     <div className='counter-image'>
       <Container className='tree-counter-content'>
