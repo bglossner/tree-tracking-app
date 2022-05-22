@@ -5,12 +5,6 @@ import CountUp from 'react-countup';
 import { RecentlyPlantedCard } from './recently-planted-card/RecentlyPlantedCard';
 import { useEffect, useState } from 'react';
 
-// { "img": "tree1",
-// "tree_species": "platanus racemosa",
-// "tree_number": 10,
-// "date_planted": "2022-04-22"
-// },
-
 export interface IRecentlyPlantedRecord {
   img: string;
   treeSpecies: string;
