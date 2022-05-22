@@ -6,14 +6,22 @@ import { useEffect } from 'react';
 import { getAttachments, queryFeatures } from '@esri/arcgis-rest-feature-layer';
 import './RecentlyPlantedCard.scss'
 
-const CARDS_DISPLAYED : number = 5;
+const CARDS_DISPLAYED = 5;
+
+interface ICardData {
+  "img": String,
+  "tree_species": String,
+  "tree_number": number,
+  "date_planted": Date,
+  "ShowableName": String
+};
 
 function getData() {
   let mapJSON;
   useEffect(() => {
     queryFeatures({
       url: PUBLIC_VIEW_URL,
-      resultRecordCount: 5,
+      resultRecordCount: CARDS_DISPLAYED,
       orderByFields: "objectid DESC",
     }).then(x => {
       mapJSON = x;
@@ -25,7 +33,6 @@ function getData() {
   console.log(mapJSON);
 }
 
-export function DataProcessor(data : JSON) {
-
+export function DataProcessor(data: ICardData) {
   return data;
 }

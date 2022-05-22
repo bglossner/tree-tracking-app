@@ -1,9 +1,11 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent';
 import './PlantedDash.scss';
 import CountUp from 'react-countup';
 import { RecentlyPlantedCard } from './recently-planted-card/RecentlyPlantedCard';
 import { useEffect, useState } from 'react';
+
+interface IProps {
+  currentPlanted: number;
+} 
 
 export interface IRecentlyPlantedRecord {
   img: string;
@@ -41,9 +43,8 @@ const dataProcessor = async (
   };
 };
 
-export const PlantedDashboard = () => {
+export const PlantedDashboard = ({ currentPlanted }: IProps) => {
   const [recentlyPlanted, setRecentlyPlanted] = useState<IRecentlyPlantedRecord[]>([]);
-  const currentPlanted = 2124;
 
   useEffect(() => {
     retrieveRecentlyPlantedDataMock()
@@ -61,7 +62,7 @@ export const PlantedDashboard = () => {
   return (
     <div className='dashboard-outline'>
       <div className='dashboard-header'>
-        <h2 className='recently-planted-label' >Recently Planted</h2>
+        <h2 className='recently-planted-label'>Recently Planted</h2>
         <div className='map-number-of-trees'>
           <CountUp className='map-counter' end={currentPlanted} duration={0} separator=',' useEasing={true}/>
           <p className='trees-planted-label'>Trees Total</p>
