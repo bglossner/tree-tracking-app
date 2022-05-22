@@ -64,7 +64,7 @@ export const PlantedDashboard = ({ currentPlanted }: IProps) => {
       <div className='dashboard-header'>
         <h2 className='recently-planted-label'>Recently Planted</h2>
         <div className='map-number-of-trees'>
-          <CountUp className='map-counter' end={currentPlanted} duration={0} separator=',' useEasing={true}/>
+          <p className='planted-count'>{currentPlanted}</p>
           <p className='trees-planted-label'>Trees Total</p>
         </div>
       </div>
