@@ -244,7 +244,7 @@ export const PlantPage = () => {
         you to get started.
       </p>
       <button type="button" onClick={handleExpandButton()}>
-        <p>{anyAccordionClosed(accordionMap) ? "Expand" : "Close"} All</p>
+        {anyAccordionClosed(accordionMap) ? "Expand" : "Close"} All
       </button>
       <div className="accordion-container">
         {
