@@ -1,20 +1,47 @@
-.planted-dashboard {
+.card-holder {
+  width: 30vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 
-  .dashboard {
-    // margin-left: 10vh;
-    margin: 2vh 10vh 0 10vh;
-    border: 0.75vw solid #2d2d2d;
-    border-radius: 1vw;
-    width: 30vw;
-    height: 75vh;
-  }
+.map-counter {
+  font-size: 1em;
+  font-weight: 700;
+}
 
-  .map-counter {
-    font-size: 10vh;
-    font-weight: 700;
-  }
+.map-number-of-trees {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+}
 
-  .trees-planted-label {
-    display: inline;
-  }
+.trees-planted-label {
+  margin: 0;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 30vw;
+}
+
+.dashboard-outline {
+  border: 0.35vw solid #2d2d2d;
+  border-radius: 1vw;
+  width: 30vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.planted-count {
+  margin: 0.25em 0;
+  font-weight: bold;
+  font-size: 1.25em;
 }

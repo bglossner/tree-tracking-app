@@ -10,3 +10,11 @@ main {
   padding-top: gv.$header-height;
   margin-top: calc(-1 * gv.$header-height);
 }
+
+.main-pg-section {
+  margin: 2em 0;
+
+  h1 {
+    font-size: 2em;
+  }
+}
