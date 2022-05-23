@@ -21,15 +21,21 @@ export const Home = () => {
 
   return (
     <main>
-      <RegisterTree currentPlanted={numberOfTrees} />
-      {/* Just filler text to demo scrolling. Header links scroll tp specific id tags */}
-      <h1 id='Plant' className='anchor'>Plant a Tree</h1>
-      <PlantPage />
-      <h1 id='About' className='anchor'>About</h1>
-      <Slideshow/>
-      <h1 id='Map' className='anchor'>Map</h1>
-      <MapContent currentPlanted={numberOfTrees} />
-      <br/>
+      <section>
+        <RegisterTree currentPlanted={numberOfTrees} />
+      </section>
+      <section className='main-pg-section'>
+        <h1 id='Plant' className='anchor'>Plant a Tree</h1>
+        <PlantPage />
+      </section>
+      <section className='main-pg-section'>
+        <h1 id='About' className='anchor'>About</h1>
+        <Slideshow />
+      </section>
+      <section className='main-pg-section'>
+        <h1 id='Map' className='anchor'>Map</h1>
+        <MapContent currentPlanted={numberOfTrees} />
+      </section>
     </main>
   );
 }
