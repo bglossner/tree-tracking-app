@@ -123,10 +123,11 @@ export const Slideshow = () => {
       <a className="next" onClick={arrowClickHandler}>&gt;</a>
 
       <div className='dotContainer'>
-        <span className="dot" onClick={(event: React.MouseEvent<HTMLElement>) => dotClickHandler(event,0)}></span> 
-        <span className="dot" onClick={(event: React.MouseEvent<HTMLElement>) => dotClickHandler(event,1)}></span> 
-        <span className="dot" onClick={(event: React.MouseEvent<HTMLElement>) => dotClickHandler(event,2)}></span> 
-        <span className="dot" onClick={(event: React.MouseEvent<HTMLElement>) => dotClickHandler(event,3)}></span> 
+        {
+          slideList.map((slide, idx) => (
+            <span className="dot" onClick={(event: React.MouseEvent<HTMLElement>) => dotClickHandler(event,idx)}></span> 
+          ))
+        }
       </div>
     </div>
   );
