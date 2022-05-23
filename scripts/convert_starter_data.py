@@ -5,7 +5,33 @@ import numpy as np
 import pandas as pd
 import io
 
-def main(filename: str):
+START_OBJECT_ID = 20
+USE_OBJECT_IDS = True
+
+def add_object_id(pdf):
+    tree_numbers = pd.Series(list(range(START_OBJECT_ID, len(pdf) + START_OBJECT_ID))).to_numpy()
+    pdf['tree_number'] = tree_numbers
+    return pdf
+
+def merge_globalid_file(renamed_pdf, globalid_file):
+    gid_df = pd.read_csv(globalid_file)
+    gid_df = gid_df.rename(columns={'ObjectID': 'objectid', 'GlobalID': 'globalid'}, inplace=False)
+    new_pdf = renamed_pdf.merge(gid_df[['objectid', 'globalid']], left_on='tree_number', right_on='objectid')
+    new_pdf = new_pdf.drop(columns=['objectid', 'tree_number'])
+    return new_pdf
+
+def convert_names(pdf):
+    renamed_pdf = pdf.rename(columns={
+        'Verified Tree Species': 'verified_tree_species',
+        'Name or Group': 'record_your_initials',
+        'Contact Email': 'contact_email',
+        'Name Visibility': 'name_visibility',
+        'Name to Show': 'show_name',
+    }, inplace=False)
+    # renamed_pdf = renamed_pdf[['verified_tree_species', 'record_your_initials', 'contact_email', 'name_visibility', 'show_name']]
+    return renamed_pdf
+
+def main(filename: str, globalid_file=None):
     with open(filename, 'rb') as f:
         content = f.read()
     content = content.replace(b'\xd4', b"'")
@@ -32,10 +58,19 @@ def main(filename: str):
     renamed_pdf['Name to Show'] = np.where(renamed_pdf['Name Visibility'] == 'Yes', renamed_pdf['Name or Group'], 'Anonymous')
     renamed_pdf['Notes'] = 'Auto-populated starting data'
     renamed_pdf['This tree needs adoption'] = 'No'
+    renamed_pdf['field_17'] = renamed_pdf['Verified Tree Species']
+
     renamed_pdf = renamed_pdf[renamed_pdf['x'].notna()]
     renamed_pdf = renamed_pdf.fillna('')
+
+    renamed_pdf = convert_names(renamed_pdf)
+    if USE_OBJECT_IDS:
+        renamed_pdf = add_object_id(renamed_pdf)
+    if globalid_file is not None and len(globalid_file) > 0:
+        renamed_pdf = merge_globalid_file(renamed_pdf, globalid_file)
+
     without_extension = '.'.join(filename.split('.')[:-1])
-    renamed_pdf.to_csv(without_extension.replace(' ', '_').lower() + '.csv', index=False)
+    renamed_pdf.iloc[150:].to_csv(without_extension.replace(' ', '_').lower() + '.csv', index=False)
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], globalid_file=(None if len(sys.argv) <= 2 else sys.argv[2]))

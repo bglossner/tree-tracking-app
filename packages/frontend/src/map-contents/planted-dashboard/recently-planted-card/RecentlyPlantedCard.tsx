@@ -6,7 +6,7 @@ import './RecentlyPlantedCard.scss';
 
 interface IProps extends IRecentlyPlantedRecord {}
 
-export const RecentlyPlantedCard = ({ img, treeSpecies, treeNumber, datePlanted, ShowableName }: IProps) => {
+export const RecentlyPlantedCard = ({ img, treeSpecies, treeNumber, datePlanted, name }: IProps) => {
   return (
     <Card>
       <CardContent>
@@ -21,7 +21,7 @@ export const RecentlyPlantedCard = ({ img, treeSpecies, treeNumber, datePlanted,
           {datePlanted.toLocaleDateString('en-US')}
         </Typography>
         <Typography className='recently-planted-right recently-planted-tree-name' variant='h5' >
-          {ShowableName}
+          {name}
         </Typography>
       </CardContent>
     </Card>
