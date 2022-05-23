@@ -2,6 +2,7 @@ import './PlantedDash.scss';
 import CountUp from 'react-countup';
 import { RecentlyPlantedCard } from './recently-planted-card/RecentlyPlantedCard';
 import { useEffect, useState } from 'react';
+import { DataProcessor } from './recently-planted-card/DataProcessor';
 
 interface IProps {
   currentPlanted: number;
@@ -45,6 +46,10 @@ const dataProcessor = async (
 
 export const PlantedDashboard = ({ currentPlanted }: IProps) => {
   const [recentlyPlanted, setRecentlyPlanted] = useState<IRecentlyPlantedRecord[]>([]);
+
+  const theData = DataProcessor();
+  console.log('in the planted dash');
+  console.log(theData);
 
   useEffect(() => {
     retrieveRecentlyPlantedDataMock()
