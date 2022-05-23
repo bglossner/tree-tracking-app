@@ -15,6 +15,14 @@ const HomeNavLinks: INavLinkInfo<ILinkComponentProps>[] = [
   },
   {
     to: {
+      hash: "Plant",
+      pathname: "/",
+    },
+    innerText: "Plant a Tree",
+    shouldUnderline: true,
+  },
+  {
+    to: {
       hash: "About",
       pathname: "/",
     },
