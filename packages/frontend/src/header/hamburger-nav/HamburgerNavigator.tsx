@@ -82,6 +82,7 @@ export const HamburgerNavbar = ({ navbarLinks }: IProps<any>) => {
                       to={to}
                       smooth
                       key={innerText}
+                      onClick={() => { handleDrawerClose(); }}
                       {...rest}
                     >
                       {innerText}
