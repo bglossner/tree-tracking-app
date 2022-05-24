@@ -1,8 +1,10 @@
-import { CSSProperties } from 'react';
-import { To, useLocation } from 'react-router-dom';
+import { Location, To, useLocation } from 'react-router-dom';
 import { NavHashLink } from 'react-router-hash-link';
 import './Header.scss';
 import ufeiLogo from '../assets/images/ufei-logo.png';
+import { CSSProperties } from 'react';
+import { HamburgerNavbar } from './hamburger-nav/HamburgerNavigator';
+import { useWindowSize } from '../util/hooks/useWindowInfo';
 
 const ACTIVE_STYLE: CSSProperties = {
   textDecoration: "underline",
@@ -28,37 +30,39 @@ interface IProps<T extends ILinkComponentProps> {
   navbarLinks: INavLinkInfo<T>[];
 }
 
-export const Header = ({ navbarLinks }: IProps<any>) => {
+const isActiveDecider = (activeByPath: boolean, to: To, location: Location): CSSProperties => {
+  const locationHash = location.hash?.split("#")[1];
+  let hash: string | undefined;
+
+  if (typeof to === 'string') {
+    const toHash = to?.split("#")[1];
+    if (locationHash === toHash || (to === "#top" && !locationHash)) {
+      return activeByPath ? ACTIVE_STYLE : {};
+    }
+
+    hash = to;
+  } else {
+    hash = to.hash;
+  }
+
+  if (hash === undefined && !locationHash) {
+    return activeByPath ? ACTIVE_STYLE : {};
+  } else {
+    return activeByPath && locationHash === hash ? ACTIVE_STYLE : {};
+  }
+};
+
+export type isActiveDeciderFn = typeof isActiveDecider;
+
+const RegularNavbar = ({ navbarLinks }: IProps<any>) => {
   const location = useLocation();
 
-  const isActiveDecider = (activeByPath: boolean, to: To): CSSProperties => {
-    const locationHash = location.hash?.split("#")[1];
-    let hash: string | undefined;
-
-    if (typeof to === 'string') {
-      const toHash = to?.split("#")[1];
-      if (locationHash === toHash || (to === "#top" && !locationHash)) {
-        return activeByPath ? ACTIVE_STYLE : {};
-      }
-
-      hash = to;
-    } else {
-      hash = to.hash;
-    }
-
-    if (hash === undefined && !locationHash) {
-      return activeByPath ? ACTIVE_STYLE : {};
-    } else {
-      return activeByPath && locationHash === hash ? ACTIVE_STYLE : {};
-    }
-  };
-
   return (
-    <header className="App-header">
+    <>
       <a id="ufei-logo-header-container" href="https://ufei.calpoly.edu/">
         <img alt="UFEI Logo" src={ufeiLogo} />
       </a>
-      <nav>
+      <nav className='full-nav-bar'>
         {navbarLinks.map(({ to, innerText, componentType, shouldUnderline, ...rest }) => {
           const LinkType = componentType ?? NavHashLink; 
 
@@ -68,15 +72,29 @@ export const Header = ({ navbarLinks }: IProps<any>) => {
                 to={to}
                 smooth
                 key={innerText}
-                style={({ isActive }) => shouldUnderline ? isActiveDecider(isActive, to) : {}}
+                style={({ isActive }) => shouldUnderline ? isActiveDecider(isActive, to, location) : {}}
                 {...rest}
               >
-                &nbsp;&nbsp;&nbsp;{innerText}&nbsp;&nbsp;&nbsp;
+                {innerText}
               </LinkType>
             </div>
           );
         })}
       </nav>
+    </>
+  );
+}
+
+export const Header = ({ navbarLinks }: IProps<any>) => {
+  const { isDesktop } = useWindowSize();
+
+  return (
+    <header className="App-header">
+      {isDesktop ? (
+        <RegularNavbar navbarLinks={navbarLinks} />
+      ) : (
+        <HamburgerNavbar navbarLinks={navbarLinks} />
+      )}
     </header>
   );
 };

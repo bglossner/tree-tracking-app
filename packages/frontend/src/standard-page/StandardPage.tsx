@@ -10,7 +10,7 @@ export interface IStandardPageProps {
 const HomeNavLinks: INavLinkInfo<ILinkComponentProps>[] = [
   {
     to: "/#top",
-    innerText: "Get Involved",
+    innerText: "Register a Tree",
     shouldUnderline: true,
   },
   {
