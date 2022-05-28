@@ -6,7 +6,11 @@ import { PlantPage } from '../plant-tree/PlantPage';
 import { useEffect, useState } from 'react';
 import { getNumberOfTrees } from '../util/common-queries';
 
+/**
+ * Component for home page
+ */
 export const Home = () => {
+  // Set number of trees as 0
   const [numberOfTrees, setNumberOfTrees] = useState(0);
 
   useEffect(() => {

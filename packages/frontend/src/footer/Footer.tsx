@@ -1,6 +1,11 @@
 import './Footer.scss';
 import calpolyLogo from '../assets/images/calpoly-logo.png';
 
+/**
+ * Component that acts as footer
+ * 
+ * @param navbarLinks Navigation links
+ */
 export const Footer = () => {
   return (
     <footer>

@@ -2,14 +2,22 @@ import { useEffect, useState } from "react";
 import { getNumberOfTrees } from "../util/common-queries";
 import { usePrevious } from "../util/hooks/usePrevious";
 import { PostRegistrationView } from "./post-registration-view/PostRegistrationView";
-import { ITreeSubmission, TreeTrackingForm } from "./tree-tracking-form";
+import { ITreeSubmission, TreeTrackingForm } from "./TreeTrackingForm";
 
+// Represents a given state for tree submission
+// PageState.LOADING is currently unused
 enum PageState {
   NEW_TREE, POST_REGISTRATION, LOADING,
 };
 
-const LOAD_FROM_COUNT = false;
+// Whether the given tree number is the current number of trees in the DB.
+// Defaults to false unless environment variable set
+const LOAD_FROM_COUNT = process.env.REACT_APP_LOAD_FROM_COUNT === "true";
 
+/**
+ * Component that acts as controller for whether to show the tree submission form
+ * or the post registration page
+ */
 export const TreeRegisterView = () => {
   const [treesSubmitted, setTreesSubmitted] = useState<ITreeSubmission[]>([]);
   const [currentTreeNumber, setCurrentTreeNumber] = useState<number | undefined>(undefined);
@@ -27,14 +35,16 @@ export const TreeRegisterView = () => {
   };
 
   useEffect(() => {
+    // If the page state is loading and wasn't before, get the tree number 
     if (currentPage === PageState.LOADING && prevPage !== PageState.LOADING) {
       if (LOAD_FROM_COUNT) {
         getNumberOfTrees()
-        .then((treeNumber) => {
-          setCurrentTreeNumber(treeNumber);
-          setCurrentPage(PageState.POST_REGISTRATION);
-        });
+          .then((treeNumber) => {
+            setCurrentTreeNumber(treeNumber);
+            setCurrentPage(PageState.POST_REGISTRATION);
+          });
       } else {
+        // Get the last tree number for the last tree submitted
         setCurrentTreeNumber(treesSubmitted[treesSubmitted.length - 1].surveyFeatureSet.features[0].objectId);
         setCurrentPage(PageState.POST_REGISTRATION);
         window.scrollTo(0, 0);
@@ -47,6 +57,7 @@ export const TreeRegisterView = () => {
       return (
         <PostRegistrationView treeNumber={currentTreeNumber!} submitAnotherTree={submitAnotherTree} />
       );
+    // Currently no loading page so just stay on form page
     case PageState.LOADING:
     case PageState.NEW_TREE:
     default:

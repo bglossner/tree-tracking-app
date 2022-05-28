@@ -3,7 +3,13 @@ import { Header, ILinkComponentProps, INavLinkInfo } from '../header/Header';
 import './StandardPage.scss';
 
 export interface IStandardPageProps {
+  /**
+   * Whether to put padding between header and main content
+   */
   useTopPadding?: boolean;
+  /**
+   * Component representing main content
+   */
   component: JSX.Element;
 };
 
@@ -39,6 +45,9 @@ const HomeNavLinks: INavLinkInfo<ILinkComponentProps>[] = [
   },
 ];
 
+/**
+ * Component for a standard looking page on site (header, main content, footer)
+ */
 export const StandardPage: React.FC<IStandardPageProps> = ({ component, useTopPadding }) => {
   return (
     <>

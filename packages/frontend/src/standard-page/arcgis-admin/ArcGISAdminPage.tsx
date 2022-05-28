@@ -14,7 +14,13 @@ import { ArcGISSignIn } from "./arcgis-signin/ArcGISSignIn";
 import styles from './ArcGISAdminPage.module.scss';
 
 export interface IProps {
+  /**
+   * Whether to use padding between header and main content
+   */
   useTopPadding?: boolean;
+  /**
+   * The component (function, not JSX) to be rendered if signed in
+   */
   component: React.FC<any>;
 };
 
@@ -23,19 +29,31 @@ interface IAdditionalButtonProps {
   onClick: () => void;
 };
 
+// Specific implementation of INavLinkInfo
 interface INavLinkOverrideProps extends INavLinkInfo<ILinkComponentOverrideProps>, IAdditionalButtonProps {};
-
 interface ILinkComponentOverrideProps extends ILinkComponentProps, IAdditionalButtonProps {};
 
 type IUserSessionError = boolean;
 
 export interface IUserSessionInfo {
+  /**
+   * Whether an error exists for sign in
+   */
   error: IUserSessionError;
+  /**
+   * User session (null if no session)
+   */
   userSession: UserSession | null;
+  /**
+   * Whether the login is loading
+   */
   loading: boolean;
 };
 
-const ArcGISAdminButton: React.FC<ILinkComponentOverrideProps> = ({ children, onClick, ...props }) => {
+/**
+ * Component for rendering a button
+ */
+const ArcGISAdminButton: React.FC<ILinkComponentOverrideProps> = ({ onClick, ...props }) => {
   return (
     <button onClick={onClick} className={styles.navbarBtn}>
       {props.buttonText}
@@ -43,6 +61,10 @@ const ArcGISAdminButton: React.FC<ILinkComponentOverrideProps> = ({ children, on
   );
 };
 
+/**
+ * Helper function for when user clicks sign in button
+ * @returns 
+ */
 function onSignInClickedWrapper(
   setUserSession: (u: UserSession) => void,
   setError: (b: boolean) => void,
@@ -59,52 +81,58 @@ function onSignInClickedWrapper(
   }
 }
 
+/**
+ * Wrapper component for a page that requires signing into ArcGIS
+ * 
+ * Still has header, main content, and footer
+ */
 export const ArcGISAdminPage = ({ component: Component, useTopPadding }: IProps) => {
   const [error, setError] = useState(false);
   const [userSession, setUserSession] = useState<UserSession | null>(checkIfExistingUserSession);
   const [loading, setLoading] = useState<boolean>(false);
 
+  // Links live INSIDE component because there are references to state setters
   const adminPageNavbarLinks: INavLinkOverrideProps[] = [
+    // Link to home page
     {
       to: '/',
       shouldUnderline: false,
       innerText: 'Home',
       buttonText: '',
+      // Do nothing special on click. Instead, use built-in navigation
       onClick: () => null,
     }
   ];
 
-  if (userSession) {
-    if (userSession && !loading) {
-      adminPageNavbarLinks.push({
-        to: '',
-        shouldUnderline: false,
-        innerText: '',
-        componentType: ArcGISAdminButton,
-        buttonText: 'Sign Out',
-        onClick: () => { updateSessionInfo(undefined); setUserSession(null); setError(false); }
-      });
-    }
+  // Display signout button in navbar as well if user is signed in
+  if (userSession && !loading) {
+    adminPageNavbarLinks.push({
+      to: '',
+      shouldUnderline: false,
+      innerText: '',
+      componentType: ArcGISAdminButton,
+      buttonText: 'Sign Out',
+      onClick: () => { updateSessionInfo(undefined); setUserSession(null); setError(false); }
+    });
   }
 
   useEffect(() => {
-    if (userSession) {
-      if (process.env.REACT_APP_CHECK_APP_ACCESS === 'true') {
-        hasAppAccess(CLIENT_ID, userSession)
-          .then((hasAccess) => {
-            setError(!hasAccess);
-          })
-          .catch((e) => {
-            setError(true);
-          });
-      }
+    // Check if user has access to app. Not really in use (behind environment variable)
+    if (userSession && process.env.REACT_APP_CHECK_APP_ACCESS === 'true') {
+      hasAppAccess(CLIENT_ID, userSession)
+        .then((hasAccess) => {
+          setError(!hasAccess);
+        })
+        .catch((e) => {
+          setError(true);
+        });
     }
   }, [userSession]);
 
+  // On page load, check if user has just been redirected to this page from the ArcGIS portal
+  // If so, this means this window will close shortly!
   useEffect(() => {
-    if (parseAuthOutOfURL()) {
-      return;
-    }
+    parseAuthOutOfURL();
   }, []);
 
   return (

@@ -4,6 +4,9 @@ interface IProps {
   onSignInClicked: () => void;
 };
 
+/**
+ * Component to display while user is not signed in but on a page that requires ArcGIS auth
+ */
 export function ArcGISSignIn({ onSignInClicked }: IProps) {
   return (
     <main className={styles.main}>
