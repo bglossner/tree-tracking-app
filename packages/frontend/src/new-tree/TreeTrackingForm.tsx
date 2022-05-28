@@ -1,40 +1,85 @@
 import { useEffect, useRef, useState } from 'react';
-import { generateForm } from './survey123-interface';
+import { FormDataEventFn, generateForm } from './survey123-interface';
 import './tree-tracking-form.scss';
 
 export interface IAddResult {
+  /**
+   * Tree number (ArcGIS object id)
+   */
   objectId: number;
+  /**
+   * Unique ID for tree. NOT USED. Same as global id
+   */
   uniqueId: number;
+  /**
+   * ArcGIS global id for tree
+   */
   globalId: string;
+  /**
+   * Whether the trees was successful in submitting
+   */
   success: boolean;
 }
 
 export interface ITreeSubmissionResult {
+  /**
+   * Only length 1 for this application.
+   */
   addResults: IAddResult[];
+  /**
+   * Any related uploaded attachments. NOT USED
+   */
   attachments: any;
 }
 
 export interface ISurveyFeatures {
+  /**
+   * Any related uploaded attachments. NOT USED
+   */
   attachments: any;
+  /**
+   * Object containing info about fields and such from form. NOT USED
+   */
   attributes: any;
+  /**
+   * Longitude/Latitude coordinates object of tree. NOT USED
+   */
   geometry: any;
+  /**
+   * Tree number (ArcGIS object id)
+   */
   objectId: number;
 }
 
 export interface ISurveyFeatureSet {
+  /**
+   * Features for survey. General object containing info about survey/form features
+   * 
+   * Not related to actual submission
+   */
   features: ISurveyFeatures[];
+  /**
+   * Actual form object
+   */
   form: any;
 }
 
 export interface ITreeSubmission {
+  /**
+   * See @ITreeSubmissionResult
+   */
   result: ITreeSubmissionResult[];
+  /**
+   * See @ISurveyFeatureSet
+   */
   surveyFeatureSet: ISurveyFeatureSet;
 }
 
+// DOM element ID for container for survey to go in
 const SURVEY_DIV_CONTAINER = "survey-container";
 
-type FormDataEventFn = (webform: any, data: any) => void;
-
+// Sets the survey's default location for map question for where tree is planted
+// to user's current location
 const onFormLoaded = (formLoadedCallback: FormDataEventFn) => {
   return (webform: any, data: any) => {
     // taken from https://developers.arcgis.com/survey123/guide/embed-a-survey-using-javascript/
@@ -51,9 +96,9 @@ const onFormLoaded = (formLoadedCallback: FormDataEventFn) => {
   };
 };
 
+// Form submission can be successful or not. Take appropriate action
 const onFormSubmitted = (formSubmittedCallback: FormDataEventFn, formSubmittedFailureCallback: FormDataEventFn) => {
   return (webform: any, data: any) => {
-    console.log(data);
     if (data.error?.message) {
       formSubmittedFailureCallback(webform, data);
     } else {
@@ -64,11 +109,12 @@ const onFormSubmitted = (formSubmittedCallback: FormDataEventFn, formSubmittedFa
 
 const onFormFailed = (formFailedCallback: FormDataEventFn) => {
   return (webform: any, data: any) => {
-    console.log(data);
     formFailedCallback(webform, data);
   }
 };
 
+// Used to help with form resizing and initial container height.
+// Makes container the size of the form so that there is no overflow/scrollbar for form
 const setHeightBasedOnData = (container: HTMLElement | null, data: any) => {
   if (container?.style && data?.contentHeight) {
     const height = data.contentHeight;
@@ -78,19 +124,29 @@ const setHeightBasedOnData = (container: HTMLElement | null, data: any) => {
 };
 
 export interface ITreeTrackingFormProps {
+  /**
+   * Callback for what to do when there is a tree submitted
+   */
   onNewTreeSubmission?: (data: any) => void;
 };
 
+/**
+ * Component for the Survey123 form for submitting a tree planted
+ */
 export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps) => {
   const [formLoaded, setFormLoaded] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formSubmitError, setFormSubmitError] = useState(false);
+  // Not used but may be used later
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_formSubmitted, setFormSubmitted] = useState(false);
+  // Not used but may be used later
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_formSubmitError, setFormSubmitError] = useState(false);
   const [formFailed, setFormFailed] = useState(false);
   const divContainerRef = useRef<HTMLDivElement | null>(null);
-
+  
+  // Inject survey on component load
   useEffect(() => {
     const onFormSubmission = (_webform: any, data: any) => {
-      console.log(data);
       setFormSubmitError(false);
       setFormSubmitted(true);
   
@@ -120,8 +176,6 @@ export const TreeTrackingForm = ({ onNewTreeSubmission }: ITreeTrackingFormProps
       );
     }
   }, [onNewTreeSubmission]);
-
-  // some change
 
   return (
     <>

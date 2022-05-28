@@ -6,10 +6,19 @@ import './PostRegistrationView.scss';
 import TreeImg from './tree-outline-fill-green.svg';
 
 interface IProps {
+  /**
+   * Tree number, object id of tree
+   */
   treeNumber: number;
+  /**
+   * What to do when user wants to submit another tree
+   */
   submitAnotherTree: () => void;
 }
 
+/**
+ * Component that acts as view for showing a successful tree submission.
+ */
 export const PostRegistrationView = ({ treeNumber, submitAnotherTree }: IProps) => {
   return (
     <main id="post-reg-view">

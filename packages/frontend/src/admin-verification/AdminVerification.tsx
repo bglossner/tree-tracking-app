@@ -1,8 +1,12 @@
 import { IUserSessionInfo } from "../standard-page/arcgis-admin/ArcGISAdminPage";
 import './AdminVerification.scss';
 
+// Takes no additional props for now
 interface IProps extends IUserSessionInfo {};
 
+/**
+ * Component for admin verification page (just has helpful links for an Admin all in 1 place)
+ */
 export function AdminVerification({ error, userSession, loading }: IProps) {
   if (error) {
     return (

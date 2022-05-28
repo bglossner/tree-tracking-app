@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+
+This file is for helping to convert the starting CSV file with
+tree data into a format that can be uploaded to ArcGIS
+
+"""
+
 import sys
 import numpy as np
 import pandas as pd

@@ -1,3 +1,7 @@
+/**
+ * This hook is useful for getting window size and mobile vs desktop specs
+ */
+
 import { useEffect, useState } from "react";
 
 export interface WindowSizeInfo {
@@ -16,7 +20,6 @@ const getComputedValues = (): Pick<WindowSizeInfo, 'isDesktop' | 'isMobile'> => 
   };
 };
 
-// Hook
 export function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
