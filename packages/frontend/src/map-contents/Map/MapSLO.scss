@@ -11,3 +11,9 @@
     height:100%;
   }
 }
+
+@media (max-width: 40em) {
+  .embed-container {
+    width: 90vw;
+  }
+}
