@@ -45,7 +45,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 40em) {
+@media (max-width: gv.$default-resize-width) {
   .MapContent {
     flex-direction: column;
     justify-content: space-between;
