@@ -44,3 +44,11 @@
   max-width: 100vw;
   overflow: hidden;
 }
+
+@media (max-width: gv.$default-resize-width) {
+  .MapContent {
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2em;
+  }
+}

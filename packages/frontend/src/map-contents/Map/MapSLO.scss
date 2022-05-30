@@ -1,3 +1,5 @@
+@use "../../global-variables" as gv;
+
 .embed-container {
 	margin: 0 2vw;
   border: 0.75vw solid #2d2d2d;
@@ -9,5 +11,11 @@
   iframe {
     width:100%;
     height:100%;
+  }
+}
+
+@media (max-width: gv.$default-resize-width) {
+  .embed-container {
+    width: 90vw;
   }
 }
