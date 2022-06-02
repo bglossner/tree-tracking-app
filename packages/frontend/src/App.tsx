@@ -1,9 +1,20 @@
-import { HashRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { Home } from './home/Home';
 import { StandardPage } from './standard-page/StandardPage';
 import { AdminVerification } from './admin-verification/AdminVerification';
 import { ArcGISAdminPage } from './standard-page/arcgis-admin/ArcGISAdminPage';
 import { TreeRegisterView } from './new-tree/TreeRegisterView';
+import { PostRegistrationView } from './new-tree/post-registration-view/PostRegistrationView';
+
+function TempPostRegView() {
+  const navigate = useNavigate();
+
+  return (
+    <PostRegistrationView treeNumber={2102} submitAnotherTree={
+      () => navigate('/new-tree')
+    } />
+  );
+}
 
 // Root URL for application
 let basename: string;
@@ -45,6 +56,7 @@ function App() {
         <Route path="/" element={<StandardPage useTopPadding={false} component={<Home />} />} />
         <Route path="/new-tree" element={<StandardPage component={<TreeRegisterView />} />} />
         <Route path="/verification" element={<ArcGISAdminPage component={AdminVerification} />} />
+        <Route path="/post-registration" element={<TempPostRegView />} />
         <Route path="*" element={<StandardPage component={
           <p style={{ margin: "25vh 0", width: "100%", textAlign: "center", fontSize: "2em" }}>
             Page not found.
