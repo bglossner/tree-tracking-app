@@ -46,3 +46,9 @@ header {
 #ufei-logo-header-container {
   margin-left: 10%;
 }
+
+@media (max-width: gv.$ticker-text-resize) {
+  header nav.full-nav-bar {
+    font-size: 1em;
+  }
+}
