@@ -5,6 +5,7 @@ import ufeiLogo from '../assets/images/ufei-logo.png';
 import { CSSProperties } from 'react';
 import { HamburgerNavbar } from './hamburger-nav/HamburgerNavigator';
 import { useWindowSize } from '../util/hooks/useWindowInfo';
+import { Divider } from '@mui/material';
 
 // Style for link in navbar when on that page/location
 const ACTIVE_STYLE: CSSProperties = {
@@ -12,6 +13,7 @@ const ACTIVE_STYLE: CSSProperties = {
   textUnderlineOffset: "2vh",
 };
 
+const TEXT_TWO_LINES = 1516;
 /**
  * Type for what to actually pass to NavHashLink or NavLink or
  * whatever Link type is being used.
@@ -75,16 +77,25 @@ interface IProps<T extends ILinkComponentProps> {
  * @param location - Actual location the user is at on the website
  * @returns styling for link component if link is active 
  */
-const isActiveDecider = (activeByPath: boolean, to: To, location: Location): CSSProperties => {
+const isActiveDecider = (activeByPath: boolean, to: To, location: Location, width: number | undefined): CSSProperties => {
   const locationHash = location.hash?.split("#")[1];
   let hash: string | undefined;
+
+  let styleToUse = ACTIVE_STYLE;
+
+  if (width && (width <= TEXT_TWO_LINES)) {
+    styleToUse = {
+      ...ACTIVE_STYLE,
+      textUnderlineOffset: "0",
+    }
+  }
 
   // If "to" is string, need to parse hash out of it. Else, hash can be grabbed by property
   if (typeof to === 'string') {
     const toHash = to?.split("#")[1];
     // Active if on that hash or link is to top of page and user has no hash
     if (locationHash === toHash || (to === "#top" && !locationHash)) {
-      return activeByPath ? ACTIVE_STYLE : {};
+      return activeByPath ? styleToUse : {};
     }
 
     hash = to;
@@ -93,9 +104,9 @@ const isActiveDecider = (activeByPath: boolean, to: To, location: Location): CSS
   }
 
   if (hash === undefined && !locationHash) {
-    return activeByPath ? ACTIVE_STYLE : {};
+    return activeByPath ? styleToUse : {};
   } else {
-    return activeByPath && locationHash === hash ? ACTIVE_STYLE : {};
+    return activeByPath && locationHash === hash ? styleToUse : {};
   }
 };
 
@@ -110,6 +121,7 @@ export type isActiveDeciderFn = typeof isActiveDecider;
  */
 const RegularNavbar = ({ navbarLinks }: IProps<any>) => {
   const location = useLocation();
+  const { width } = useWindowSize();
 
   return (
     <>
@@ -117,7 +129,7 @@ const RegularNavbar = ({ navbarLinks }: IProps<any>) => {
         <img alt="UFEI Logo" src={ufeiLogo} />
       </a>
       <nav className='full-nav-bar'>
-        {navbarLinks.map(({ to, innerText, componentType, shouldUnderline, ...rest }) => {
+        {navbarLinks.map<React.ReactNode>(({ to, innerText, componentType, shouldUnderline, ...rest }) => {
           const LinkType = componentType ?? NavHashLink; 
 
           return (
@@ -126,14 +138,15 @@ const RegularNavbar = ({ navbarLinks }: IProps<any>) => {
                 to={to}
                 smooth
                 key={innerText}
-                style={({ isActive }) => shouldUnderline ? isActiveDecider(isActive, to, location) : {}}
+                style={({ isActive }) => shouldUnderline ? isActiveDecider(isActive, to, location, width) : {}}
                 {...rest}
               >
                 {innerText}
               </LinkType>
             </div>
           );
-        })}
+        }).reduce((prev, curr) => [prev, <Divider orientation='vertical' variant='middle' style={{background: '#666', height: '3vh', width: '0.1em' }} flexItem/>, curr])
+        }
       </nav>
     </>
   );
