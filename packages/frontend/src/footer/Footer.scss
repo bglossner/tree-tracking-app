@@ -6,7 +6,10 @@ footer {
   width: 100%;
   //height: gv.$footer-height;
   height: fit-content;
-  //min-height: gv.$footer-height;
+  max-height: gv.$footer-height;
+  @media (max-width: gv.$default-resize-width) {
+    max-height: gv.$footer-mobile-height;
+  }
   background-color: gv.$secondary-color;
   color: white;
 
