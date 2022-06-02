@@ -21,13 +21,14 @@ header {
     width: 60%;
     display: flex;
     justify-content: right;
+    align-items: center;
     margin-right: 0;
   }
 }
 
 .nav-link-container {
   padding: 0 4%;
-  border-right: 3px solid #666;
+  // border-right: 3px solid #666;
   text-align: center;
 
   a {
