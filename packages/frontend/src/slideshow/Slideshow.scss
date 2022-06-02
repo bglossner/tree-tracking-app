@@ -71,6 +71,11 @@ $slideshow-height: 80vh;
       color: gv.$dark-color;
       font-weight: 1000;
     }
+    
+    /* Mobile format changes */
+    @media (max-width: gv.$default-resize-width) {
+      font-size: 2.5vh;
+    }
   }
 
   /* Container for navigation dots */
