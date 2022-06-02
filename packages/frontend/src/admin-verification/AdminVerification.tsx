@@ -37,12 +37,12 @@ export function AdminVerification({ error, userSession, loading }: IProps) {
             <span>(Verify and change data)</span>
           </li>
           <li>
-            <a rel="noreferrer" target="_blank" href="https://survey123.arcgis.com/surveys/205ff9bd93a549d7b9b525f7522bcf28/overview">Survey 123</a>
+            <a rel="noreferrer" target="_blank" href="https://survey123.arcgis.com/surveys/83d728f286404ec4ac35d49dda4d9abe/overview">Survey 123</a>
             &nbsp;&nbsp;
             <span>(Redesign survey and viewing survey-specific data)</span>
           </li>
           <li>
-            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/home/item.html?id=2de8b29debfa4e9cab29794911ca7571#data">Data Table View</a>
+            <a rel="noreferrer" target="_blank" href="https://calpoly.maps.arcgis.com/home/item.html?id=eb0dd999345645c1bf47cb85d8a0233f#data">Data Table View</a>
             &nbsp;&nbsp;
             <span>(Cannot modify location)</span>
           </li>

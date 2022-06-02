@@ -13,7 +13,7 @@ import pandas as pd
 import io
 
 START_OBJECT_ID = 20
-USE_OBJECT_IDS = True
+USE_OBJECT_IDS = False
 
 def add_object_id(pdf):
     tree_numbers = pd.Series(list(range(START_OBJECT_ID, len(pdf) + START_OBJECT_ID))).to_numpy()
@@ -27,18 +27,7 @@ def merge_globalid_file(renamed_pdf, globalid_file):
     new_pdf = new_pdf.drop(columns=['objectid', 'tree_number'])
     return new_pdf
 
-def convert_names(pdf):
-    renamed_pdf = pdf.rename(columns={
-        'Verified Tree Species': 'verified_tree_species',
-        'Name or Group': 'record_your_initials',
-        'Contact Email': 'contact_email',
-        'Name Visibility': 'name_visibility',
-        'Name to Show': 'show_name',
-    }, inplace=False)
-    # renamed_pdf = renamed_pdf[['verified_tree_species', 'record_your_initials', 'contact_email', 'name_visibility', 'show_name']]
-    return renamed_pdf
-
-def main(filename: str, globalid_file=None):
+def main(filename: str, output_filename: str = None, globalid_file=None):
     with open(filename, 'rb') as f:
         content = f.read()
     content = content.replace(b'\xd4', b"'")
@@ -52,32 +41,34 @@ def main(filename: str, globalid_file=None):
     pdf = pdf[['Species', 'Common name', 'Date planted', 'Address', 'Latitude', 'Longitude', 'Adopter name', 'Adopter phone', 'Adopter email']]
     pdf = pdf.drop(columns=['Common name', 'Address', 'Adopter phone'])
     renamed_pdf = pdf.rename(columns={
-        'Species': 'Verified Tree Species',
-        'Longitude': 'x',
-        'Latitude': 'y',
-        'Adopter name': 'Name or Group',
-        'Adopter email': 'Contact Email',
-        'Date planted': 'Date Planted',
+        'Species': 'verified_tree_species',
+        'Longitude': 'Longitude',
+        'Latitude': 'Latitude',
+        'Adopter name': 'name_or_group',
+        'Adopter email': 'contact_email',
+        'Date planted': 'date_planted',
     }, inplace=False)
-    renamed_pdf['Contact Approval'] = np.where(pd.notnull(renamed_pdf['Contact Email']), 'Yes', 'No')
-    renamed_pdf['Name Visibility'] = np.where(pd.notnull(renamed_pdf['Name or Group']), 'Yes', 'No')
-    renamed_pdf['Verified'] = 'yes'
-    renamed_pdf['Name to Show'] = np.where(renamed_pdf['Name Visibility'] == 'Yes', renamed_pdf['Name or Group'], 'Anonymous')
-    renamed_pdf['Notes'] = 'Auto-populated starting data'
-    renamed_pdf['This tree needs adoption'] = 'No'
-    renamed_pdf['field_17'] = renamed_pdf['Verified Tree Species']
+    renamed_pdf['contact_approval'] = np.where(pd.notnull(renamed_pdf['contact_email']), 'Yes', 'No')
+    renamed_pdf['name_visibility'] = np.where(pd.notnull(renamed_pdf['name_or_group']), 'Yes', 'No')
+    renamed_pdf['verified'] = 'yes'
+    renamed_pdf['name_publicly'] = np.where(renamed_pdf['name_visibility'] == 'Yes', renamed_pdf['name_or_group'], 'Anonymous')
+    renamed_pdf['notes'] = 'Auto-populated starting data'
+    renamed_pdf['tree_species'] = renamed_pdf['verified_tree_species']
 
-    renamed_pdf = renamed_pdf[renamed_pdf['x'].notna()]
+    renamed_pdf = renamed_pdf[renamed_pdf['Longitude'].notna()]
     renamed_pdf = renamed_pdf.fillna('')
 
-    renamed_pdf = convert_names(renamed_pdf)
     if USE_OBJECT_IDS:
         renamed_pdf = add_object_id(renamed_pdf)
     if globalid_file is not None and len(globalid_file) > 0:
         renamed_pdf = merge_globalid_file(renamed_pdf, globalid_file)
 
-    without_extension = '.'.join(filename.split('.')[:-1])
-    renamed_pdf.iloc[150:].to_csv(without_extension.replace(' ', '_').lower() + '.csv', index=False)
+    output_filename = output_filename if output_filename is not None else ('.'.join(filename.split('.')[:-1]) + '.csv')
+    renamed_pdf.to_csv(output_filename.replace(' ', '_').lower(), index=False)
 
 if __name__ == "__main__":
-    main(sys.argv[1], globalid_file=(None if len(sys.argv) <= 2 else sys.argv[2]))
+    main(
+        sys.argv[1],
+        output_filename=(None if len(sys.argv) <= 2 else sys.argv[2]),
+        globalid_file=(None if len(sys.argv) <= 3 else sys.argv[3])
+    )
