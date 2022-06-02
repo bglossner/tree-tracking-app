@@ -2,6 +2,7 @@ import { Card } from '@mui/material';
 import { HashLink } from 'react-router-hash-link';
 import { TreeCircle } from '../../circle-progress-with-tree/TreeCircle';
 import { TREE_NUMBER_QUERY_PARAM } from '../../map-contents/Map/MapSLO';
+import { useWindowSize } from '../../util/hooks/useWindowInfo';
 import './PostRegistrationView.scss';
 import TreeImg from './tree-outline-fill-green.svg';
 
@@ -20,15 +21,20 @@ interface IProps {
  * Component that acts as view for showing a successful tree submission.
  */
 export const PostRegistrationView = ({ treeNumber, submitAnotherTree }: IProps) => {
+  const { isDesktop } = useWindowSize();
+  const widthOfCard = isDesktop ? '25vw' : '80vw';
+  const heightOfCard = isDesktop ? '80%' : '70%';
+  const topMargin = isDesktop ? '0' : '1em';
   return (
     <main id="post-reg-view">
       <section id="prv-card-container">
         <Card sx={{
-          minWidth: '25vw',
-          height: '80%',
+          mt: topMargin,
+          minWidth: widthOfCard,
+          height: heightOfCard,
           borderRadius: '20px',
         }}>
-          <h2>You just planted tree<br /><span className="tree-number"># {treeNumber}</span></h2>
+          <h2 className='planted-tree-x'>You just planted tree<br /><span className="tree-number"># {treeNumber}</span></h2>
           <div className="tree-circle-container">
             <TreeCircle
               delay={0.25}
@@ -42,7 +48,7 @@ export const PostRegistrationView = ({ treeNumber, submitAnotherTree }: IProps) 
           <p className='prv-help-text'>
             Thank you for making our community more beautiful! Your tree has been recorded and is helping SLO become more carbon neutral!
           </p>
-          <p className='prv-help-text'>
+          <p className='prv-help-text '>
             Remember to give your tree 5 gallons of water per week.
           </p>
         </div>

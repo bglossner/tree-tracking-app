@@ -8,86 +8,139 @@ main#post-reg-view {
   flex-direction: column;
   align-items: center;
   position: relative;
+}
+
+#prv-card-container {
+  background-color: gv.$secondary-color;
+  width: 92%;
+  height: 68vh;
+  border-radius: 16px;
+  padding-left: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.planted-tree-x {
+  color: gv.$green;
+}
+  
+.tree-number {
+  font-size: 10vh;
+  color: black;
+}
+  
+.tree-circle-container {
+  --width: 50%;
+  height: calc(var(--width) * 2.5);
+  width: var(--width);
+  margin: 0 auto;
+}
+
+#prv-help {
+  color: black;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 70%;
+}
+
+.prv-help-text {
+  max-width: 60%;
+  font-size: 1.25rem;
+
+}
+
+
+.post-reg-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 4vh;
+  margin-bottom: 5vh;
+  min-width: 40%;
+}
+
+.post-reg-button {
+  border: 0;
+  margin: 0;
+  outline: 0;
+  white-space: nowrap;
+  color: gv.$green;
+  background-color: gv.$bkg-color;
+  padding: 1.5% 3%;
+  width: fit-content;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 2vw;
+  box-shadow: 0px 4px 3px rgba(0, 0, 0, 1);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: inherit;
+}
+
+.post-reg-button.view-map-btn {
+  background-color: gv.$secondary-color;
+  color: gv.$green;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
+}
+
+.post-reg-button.register-another-btn {
+  background-color: gv.$green;
+  color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+@media (max-width: gv.$default-resize-width) {
+  .post-reg-actions {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vh;
+  }
+
+  .planted-tree-x {
+    margin-bottom: 0.25em;
+  }
+
+  .post-reg-button {
+    margin-bottom: 1em;
+  }
+  .prv-help-text {
+    max-width: 90%;
+    font-size: 0.9em;
+    line-height: 1.75em;
+    letter-spacing: 0.1em;
+  }
+
+  .tree-number {
+    font-size: 5vh;
+    color: black;
+  }
 
   #prv-card-container {
-    background-color: gv.$secondary-color;
-    width: 92%;
-    height: 68vh;
-    border-radius: 16px;
-    padding-left: 4vw;
-    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  #prv-help {
+    height: 80%;
+    justify-content:center;
     align-items: center;
-    justify-content: space-between;
-
-    h2 {
-      color: gv.$green;
-    }
-  
-    .tree-number {
-      font-size: 10vh;
-      color: black;
-    }
-  
-    .tree-circle-container {
-      --width: 50%;
-      height: calc(var(--width) * 2.5);
-      width: var(--width);
-      margin: 0 auto;
-    }
-
-    #prv-help {
-      color: black;
-      font-weight: bold;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      height: 70%;
-
-      .prv-help-text {
-        max-width: 60%;
-        font-size: 1.25rem;
-      }
-    }
   }
 
-  .post-reg-actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 4vh;
-    margin-bottom: 5vh;
-    min-width: 40%;
-
-    .post-reg-button {
-      border: 0;
-      margin: 0;
-      outline: 0;
-      white-space: nowrap;
-      color: gv.$green;
-      background-color: gv.$bkg-color;
-      padding: 1.5% 3%;
-      width: fit-content;
-      font-size: 1.25rem;
-      font-weight: bold;
-      border-radius: 2vw;
-      box-shadow: 0px 4px 3px rgba(0, 0, 0, 1);
-      text-decoration: none;
-      cursor: pointer;
-      font-family: inherit;
-      letter-spacing: inherit;
-    }
-
-    .post-reg-button.view-map-btn {
-      background-color: gv.$secondary-color;
-      color: gv.$green;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
-    }
-
-    .post-reg-button.register-another-btn {
-      background-color: gv.$green;
-      color: white;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    }
+  .tree-circle-container {
+    --width: 33%;
+    // height: var(--width);
+    width: var(--width);
   }
+
+  main#post-reg-view {
+    margin-top: 3vh;
+  }
+
 }
