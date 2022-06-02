@@ -11,14 +11,21 @@ interface IProps extends IRecentlyPlantedRecord {}
 export const RecentlyPlantedCard = ({ img, treeSpecies, treeNumber, datePlanted, name }: IProps) => {
   const link = `/?${TREE_NUMBER_QUERY_PARAM}=${treeNumber}#Map`;
 
+  const scrollToMap = () => {
+    window.scrollBy({
+      top: document.getElementById('Map')?.getBoundingClientRect().top ?? 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <Card>
       <CardContent>
-        <Link className='recently-planted-img-container' to={link}>
+        <Link className='recently-planted-img-container' onClick={scrollToMap} to={link}>
           <img className='recently-planted-img' src={img} alt={`Tree ${treeNumber}`} />
         </Link>
         <Typography className='recently-planted-left recently-planted-tree-number' variant='h5' >
-          <Link to={link}>
+          <Link onClick={scrollToMap} to={link}>
             {`#${treeNumber}`}
           </Link>
         </Typography>

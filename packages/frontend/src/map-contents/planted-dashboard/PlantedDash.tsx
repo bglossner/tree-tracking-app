@@ -2,10 +2,19 @@ import './PlantedDash.scss';
 import { RecentlyPlantedCard } from './recently-planted-card/RecentlyPlantedCard';
 import { useEffect, useState } from 'react';
 import { IRetrievedData, retrieveRecentlyPlantedData } from './recently-planted-card/DataProcessor';
+import { IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { usePrevious } from '../../util/hooks/usePrevious';
+import { useWindowSize } from '../../util/hooks/useWindowInfo';
+
+const CARDS_DISPLAYED = 5;
+const TREES_TO_RETRIEVE = 40;
+const TREES_TO_RETRIEVE_INCREMENTAL = 20;
 
 interface IProps {
   currentPlanted: number;
-} 
+}
 
 export interface IRecentlyPlantedRecord {
   img: string;
@@ -28,17 +37,81 @@ const dataProcessor = ({
 };
 
 export const PlantedDashboard = ({ currentPlanted }: IProps) => {
-  const [recentlyPlanted, setRecentlyPlanted] = useState<IRecentlyPlantedRecord[]>([]);
+  const [retrievedTrees, setRetrievedTrees] = useState<IRecentlyPlantedRecord[]>([]);
+  const [retrievalLock, setRetrievalLock] = useState(false); 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [loadedAllData, setLoadedAllData] = useState(false);
+  const [rightBtnDisabled, setRightBtnDisabled] = useState(true);
+  const { isDesktop } = useWindowSize();
+
+  const prevPage = usePrevious(currentPage);
+
+  const onPaginationDirectionClicked = (direction: -1 | 1) => {
+    setCurrentPage(Math.max(currentPage + (direction * CARDS_DISPLAYED), 0));
+  };
+
+  const onLastPage = () => {
+    return currentPage + CARDS_DISPLAYED >= retrievedTrees.length;
+  };
+
+  const getActiveTrees = (): IRecentlyPlantedRecord[] => {
+    if (retrievedTrees.length === 0) {
+      return [];
+    }
+
+    return retrievedTrees.slice(
+      currentPage,
+      Math.min(
+        currentPage + CARDS_DISPLAYED,
+        retrievedTrees.length
+      )
+    );
+  };
 
   useEffect(() => {
-    retrieveRecentlyPlantedData()
+    if (loadedAllData) {
+      setRightBtnDisabled(false);
+      return;
+    }
+
+    let numTreesToRetrieve: number;
+    const start = retrievedTrees.length;
+
+    if (currentPage === 0 && retrievedTrees.length === 0) {
+      numTreesToRetrieve = TREES_TO_RETRIEVE;
+    } else if (prevPage && prevPage > currentPage) {
+      setRightBtnDisabled(false);
+      return;
+    } else if (currentPage + TREES_TO_RETRIEVE > retrievedTrees.length) {
+      numTreesToRetrieve = TREES_TO_RETRIEVE_INCREMENTAL;
+    } else {
+      setRightBtnDisabled(false);
+      return;
+    }
+
+    if (retrievalLock) {
+      return;
+    } else {
+      setRetrievalLock(true);
+    }
+
+    setRightBtnDisabled(true);
+
+    retrieveRecentlyPlantedData(start, numTreesToRetrieve)
       .then((data) => {
-        setRecentlyPlanted(data.map(dataProcessor));
+        if (data.length < numTreesToRetrieve) {
+          setLoadedAllData(true);
+        }
+        setRetrievedTrees([...retrievedTrees, ...data.map(dataProcessor)]);
+        setRightBtnDisabled(false);
+        setRetrievalLock(false);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [currentPage, retrievedTrees, loadedAllData, prevPage, retrievalLock]);
+
+  const fontSize = isDesktop ? '150%' : null;
 
   return (
     <div className='dashboard-outline'>
@@ -50,7 +123,22 @@ export const PlantedDashboard = ({ currentPlanted }: IProps) => {
         </div>
       </div>
       <div className='card-holder'>
-        {recentlyPlanted.map((record, idx) => <RecentlyPlantedCard key={`rec-planted-${idx}`} {...record} />)}
+        {getActiveTrees().map((record, idx) => <RecentlyPlantedCard key={`rec-planted-${idx}`} {...record} />)}
+      </div>
+      <div className='pagination-container'>
+        {currentPage !== 0 && (
+          <IconButton onClick={() => onPaginationDirectionClicked(-1)}>
+            <ChevronLeftIcon sx={{ fontSize }} />
+          </IconButton>
+        )}
+        {!onLastPage() && (
+          <IconButton
+            disabled={rightBtnDisabled}
+            onClick={() => { setRightBtnDisabled(true); onPaginationDirectionClicked(1) }}
+          >
+            <ChevronRightIcon sx={{ fontSize }} />
+          </IconButton>
+        )}
       </div>
     </div>
 

@@ -24,7 +24,6 @@ export interface IRetrievedData {
   img: ImageInfo;
 };
 
-const CARDS_DISPLAYED = 5;
 let layer: FeatureLayer | null = null;
 
 function getLayer(): FeatureLayer {
@@ -42,10 +41,11 @@ function getLayer(): FeatureLayer {
   }
 }
 
-async function getData(): Promise<IFeature[]>  {
+async function getData(page: number, pageLength: number): Promise<IFeature[]>  {
   const lastTreesPlanted = await queryFeatures({
     url: PUBLIC_VIEW_URL,
-    resultRecordCount: CARDS_DISPLAYED,
+    resultOffset: page,
+    resultRecordCount: pageLength,
     outFields: ['objectid', 'name_publicly', 'date_planted', 'verified_tree_species', 'tree_species', 'verified'],
     returnGeometry: false,
     orderByFields: "objectid DESC",
@@ -73,8 +73,8 @@ async function getImages(objectIds: number[]): Promise<ImageMap> {
   return images;
 }
 
-export async function retrieveRecentlyPlantedData(): Promise<IRetrievedData[]> {
-  const dataWithoutImages = await getData();
+export async function retrieveRecentlyPlantedData(page: number, pageLength: number): Promise<IRetrievedData[]> {
+  const dataWithoutImages = await getData(page, pageLength);
   const objectIds = dataWithoutImages.map((entry) => (entry.attributes.objectid));
   const images = await getImages(objectIds);
 
