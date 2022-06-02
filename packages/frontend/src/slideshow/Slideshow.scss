@@ -30,17 +30,19 @@ $slideshow-height: 80vh;
 
   /* Container for slide image and text */
   .slide {
+    width: 100%;
+    height: $slideshow-height;
+
     display: none;
-    font-size: 1.75rem;
+    font-size: 2vw;
     font-family: 'Open Sans', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: left;
 
     /* Background image */
-    img.bg-image {
-      width: 100%;
-      height: $slideshow-height;
-      vertical-align: middle;
-    }
+    /* Image itself defined by Slideshow.tsx */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 
     /* Number text (1/3 etc) */
     .numbertext {
@@ -69,6 +71,11 @@ $slideshow-height: 80vh;
       color: gv.$dark-color;
       font-weight: 1000;
     }
+    
+    /* Mobile format changes */
+    @media (max-width: gv.$default-resize-width) {
+      font-size: 2.5vh;
+    }
   }
 
   /* Container for navigation dots */
@@ -78,6 +85,9 @@ $slideshow-height: 80vh;
     bottom: 5%;
     width: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     /* The dots/bullets/indicators */
     .dot {
@@ -87,8 +97,7 @@ $slideshow-height: 80vh;
       margin: 0 32px;
       background-color: #FFF8;
       border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
+      transition: background-color 0.35s ease;
     }
 
     .dot:hover {
