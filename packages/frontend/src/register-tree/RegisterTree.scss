@@ -84,3 +84,36 @@
     box-shadow: 0px 4px 3px rgba(0, 0, 0, 1);
   }
 }
+
+@media (max-width: gv.$default-resize-width) {
+  .counter-welcome {
+    text-align: center;
+    padding-right: 5%;
+    font-size: 3vw;
+  }
+  .counter {
+    font-size: 10vh;
+  }
+  .counter-holder {
+    padding: 10% 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .counter-holder p {
+    font-size: 20px;
+  }
+  .tree-action-btns-container {
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 250px;
+    bottom: 10%;
+  }
+  .trees-planted-progress {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 34%;
+    width: 30vw;
+    height: 30vh;
+  }
+}
