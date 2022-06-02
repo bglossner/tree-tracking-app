@@ -4,23 +4,30 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: gv.$footer-height;
+  //height: gv.$footer-height;
+  height: fit-content;
+  //min-height: gv.$footer-height;
   background-color: gv.$secondary-color;
   color: white;
 
   div.outer-div {
     width: 100%;
     position: relative;
+    padding: 3%;
   }
 
   div.inner-div {
     margin: 0 auto;
     position: relative;
-    width: 60%;
+    width: 80%;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    flex-direction: row;
+    @media (max-width: gv.$default-resize-width) {
+      flex-direction: column;
+    }
   }
 
   .ufei-container {
@@ -33,12 +40,17 @@ footer {
 
   .logo-container {
     width: 25%;
+    @media (max-width: gv.$default-resize-width) {
+      width:80%;
+    }
     
     #calpoly-footer-logo {
       object-fit: scale-down;
       max-width: 100%;
-      // Maybe set this as background image to prevent this issue
-      max-height: gv.$footer-height;
+      height:min-content;
+      @media (max-width: gv.$default-resize-width) {
+        padding: 5%;
+      }
     }
   }
 
