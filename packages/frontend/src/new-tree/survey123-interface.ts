@@ -89,12 +89,12 @@ export const generateForm = (
 
   // Listen to form changes and if it's a question that we want to listen to,
   // take appropriate action to change FormWatchStateData
-  // NOTE: The show_name field in form is set programmatically based on the FormWatchStateData
+  // NOTE: The name_publicly field in form is set programmatically based on the FormWatchStateData
   webform.setOnQuestionValueChanged((change: any) => {
     if (fieldsToListenTo.has(change.field)) {
       mappingEdits[change.field](stateData, change.value);
       webform.setQuestionValue({
-        show_name: determineShowName(stateData),
+        name_publicly: determineShowName(stateData),
       });
     }
   });

@@ -29,7 +29,7 @@ const dataProcessor = ({
 }: IRetrievedData): IRecentlyPlantedRecord => {
   return {
     img: img.src,
-    treeSpecies: verified_tree_species || recorded_tree_species || 'Currently Unkwown',
+    treeSpecies: verified_tree_species || recorded_tree_species || 'Currently Unknown',
     name: name_publicly,
     datePlanted: new Date(date_planted),
     treeNumber: objectid,
