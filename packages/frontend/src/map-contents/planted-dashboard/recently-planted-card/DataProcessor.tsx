@@ -46,7 +46,7 @@ async function getData(): Promise<IFeature[]>  {
   const lastTreesPlanted = await queryFeatures({
     url: PUBLIC_VIEW_URL,
     resultRecordCount: CARDS_DISPLAYED,
-    outFields: ['objectid', 'show_name', 'date_planted', 'verified_tree_species', 'field_17', 'Verified'],
+    outFields: ['objectid', 'name_publicly', 'date_planted', 'verified_tree_species', 'tree_species', 'verified'],
     returnGeometry: false,
     orderByFields: "objectid DESC",
   }) as IQueryFeaturesResponse;

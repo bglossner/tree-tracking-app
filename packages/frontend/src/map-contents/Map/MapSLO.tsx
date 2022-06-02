@@ -1,12 +1,12 @@
-import { LENGTHENED_MAP_URL, MAP_URL } from '../../constants/ArcGIS';
+import { MAP_URL } from '../../constants/ArcGIS';
 import { useQuery } from '../../util/hooks/useQuery';
 import './MapSLO.scss';
 
 export const TREE_NUMBER_QUERY_PARAM = 'tree_number';
 
-function getMapUrl(query: string | null) {
-  if (query) {
-    return `${LENGTHENED_MAP_URL}&${TREE_NUMBER_QUERY_PARAM}=${query}`;
+function getMapUrl(treeNumber: string | null) {
+  if (treeNumber) {
+    return `${MAP_URL}&query=Public_Field_View_v4_276%2Cobjectid=${treeNumber}`;
   } else {
     return `${MAP_URL}`;
   }
