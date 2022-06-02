@@ -16,12 +16,12 @@ export interface IRecentlyPlantedRecord {
 }
 
 const dataProcessor = ({
-  img, verified_tree_species, date_planted, show_name, objectid, recorded_tree_species
+  img, verified_tree_species, date_planted, name_publicly, objectid, recorded_tree_species
 }: IRetrievedData): IRecentlyPlantedRecord => {
   return {
     img: img.src,
     treeSpecies: verified_tree_species || recorded_tree_species || 'Currently Unkwown',
-    name: show_name,
+    name: name_publicly,
     datePlanted: new Date(date_planted),
     treeNumber: objectid,
   }
