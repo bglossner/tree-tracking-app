@@ -1,4 +1,5 @@
 // @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@use '../../../global-variables' as gv;
 
 .card-holder .MuiCard-root {
   --extra-width: 1vw;
@@ -87,5 +88,13 @@
 
   .MuiTypography-root {
     font-family: inherit;
+  }
+}
+
+@media (max-width: gv.$ticker-text-resize) {
+  .card-holder .MuiCard-root {
+    .recently-planted-tree-species {
+      font-size: 1em;
+    }
   }
 }
