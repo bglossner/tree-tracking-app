@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tree-tracking-app/static/css/main.caf05780.css",
-    "main.js": "/tree-tracking-app/static/js/main.93838b70.js",
+    "main.js": "/tree-tracking-app/static/js/main.53fef9a6.js",
     "static/js/9887.d838bf25.chunk.js": "/tree-tracking-app/static/js/9887.d838bf25.chunk.js",
     "static/js/9850.9170303c.chunk.js": "/tree-tracking-app/static/js/9850.9170303c.chunk.js",
     "static/js/8562.d7d30aed.chunk.js": "/tree-tracking-app/static/js/8562.d7d30aed.chunk.js",
@@ -148,7 +148,7 @@
     "static/media/tree-outline.svg": "/tree-tracking-app/static/media/tree-outline.2028cf5389c369ec997d47f138b62722.svg",
     "index.html": "/tree-tracking-app/index.html",
     "main.caf05780.css.map": "/tree-tracking-app/static/css/main.caf05780.css.map",
-    "main.93838b70.js.map": "/tree-tracking-app/static/js/main.93838b70.js.map",
+    "main.53fef9a6.js.map": "/tree-tracking-app/static/js/main.53fef9a6.js.map",
     "9887.d838bf25.chunk.js.map": "/tree-tracking-app/static/js/9887.d838bf25.chunk.js.map",
     "9850.9170303c.chunk.js.map": "/tree-tracking-app/static/js/9850.9170303c.chunk.js.map",
     "8562.d7d30aed.chunk.js.map": "/tree-tracking-app/static/js/8562.d7d30aed.chunk.js.map",
@@ -279,6 +279,6 @@
   },
   "entrypoints": [
     "static/css/main.caf05780.css",
-    "static/js/main.93838b70.js"
+    "static/js/main.53fef9a6.js"
   ]
 }
