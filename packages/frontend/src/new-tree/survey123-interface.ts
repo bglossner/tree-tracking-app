@@ -29,7 +29,7 @@ const mappingEdits: FormWatchStateDataMap = {
       stateData.shouldShowName = false;
     }
   },
-  record_your_initials: (stateData, value: string) => {
+  name_or_group: (stateData, value: string) => {
     stateData.name = value;
   },
 };
