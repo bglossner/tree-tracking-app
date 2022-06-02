@@ -7,7 +7,7 @@ main {
 }
 
 .anchor {
-  padding-top: gv.$header-height;
+  padding-top: calc(gv.$header-height + 0.5em);
   margin-top: calc(-1 * gv.$header-height);
 }
 

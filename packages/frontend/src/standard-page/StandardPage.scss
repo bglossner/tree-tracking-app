@@ -2,6 +2,9 @@
 
 .standard-page {
   padding-bottom: calc(gv.$footer-height + 2vh);
+  @media (max-width: gv.$default-resize-width) {
+    padding-bottom: calc(gv.$footer-mobile-height + 2vh);
+  }
   padding-top: gv.$header-height;
 }
 
