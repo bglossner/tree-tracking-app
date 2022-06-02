@@ -20,7 +20,7 @@ export interface IRetrievedData {
   verified_tree_species: string | undefined;
   recorded_tree_species: string | undefined;
   verified: string;
-  show_name: string;
+  name_publicly: string;
   img: ImageInfo;
 };
 
@@ -46,7 +46,7 @@ async function getData(): Promise<IFeature[]>  {
   const lastTreesPlanted = await queryFeatures({
     url: PUBLIC_VIEW_URL,
     resultRecordCount: CARDS_DISPLAYED,
-    outFields: ['objectid', 'show_name', 'date_planted', 'verified_tree_species', 'field_17', 'Verified'],
+    outFields: ['objectid', 'name_publicly', 'date_planted', 'verified_tree_species', 'tree_species', 'verified'],
     returnGeometry: false,
     orderByFields: "objectid DESC",
   }) as IQueryFeaturesResponse;
@@ -85,7 +85,7 @@ export async function retrieveRecentlyPlantedData(): Promise<IRetrievedData[]> {
       recorded_tree_species: data.attributes.field_17 as string,
       date_planted: data.attributes.date_planted as string,
       verified_tree_species: data.attributes.verified_tree_species as string,
-      show_name: data.attributes.show_name as string,
+      name_publicly: data.attributes.name_publicly as string,
       img: images[data.attributes.objectid],
     };
   });

@@ -109,10 +109,10 @@ export const Slideshow = () => {
       {
       /* Create slides from list */
       slideList.map(({slideView, imageSrc, labelText}, index, arr) => (
-        <div className="slide">
+        <div className="slide" style={{backgroundImage: 'url('+imageSrc+')'}}>
           <div className="numbertext">{index+1} / {arr.length}</div>
           <div className="labelText">{labelText}</div>
-          <img className='bg-image' src={imageSrc} />
+          {/*<img className='bg-image' src={imageSrc} />*/}
           
           {slideView}
         </div>
