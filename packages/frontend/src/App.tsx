@@ -27,6 +27,9 @@ if (process.env.REACT_APP_USE_HASH_ROUTER === 'true') {
   basename = '/';
 } else {
   RouterImpl = BrowserRouter;
+  console.log('Using BrowserRouter');
+  console.log(process.env.REACT_APP_BASENAME);
+  console.log(process.env.PUBLIC_URL);
   if (process.env.REACT_APP_BASENAME) {
     basename = process.env.REACT_APP_BASENAME;
   } else {
@@ -35,6 +38,8 @@ if (process.env.REACT_APP_USE_HASH_ROUTER === 'true') {
   // Need to strip leading slash if one exists. Default is just /
   basename = basename.startsWith('/') ? basename.substring(1) : '/';
 }
+
+console.log(basename);
 
 function App() {
   // This if-statement is used to detect if the URL needs to be cleaned up. The page the user
