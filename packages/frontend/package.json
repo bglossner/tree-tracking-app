@@ -1,7 +1,7 @@
 {
   "name": "ufe-tree-tracking-app",
   "version": "0.1.0",
-  "homepage": "https://bglossner.github.io/tree-tracking-app",
+  "homepage": "10tall.calpoly.edu",
   "private": true,
   "dependencies": {
     "@arcgis/core": "^4.23.7",
