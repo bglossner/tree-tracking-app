@@ -98,14 +98,6 @@ export const Slideshow = () => {
     dots[index].className += " active";
   }
 
-  /* Preload images */
-  useEffect(() => {
-    slideList.forEach((slide) => {
-      const img = new Image();
-      img.src = slide.imageSrc;
-    });
-  }, []);
-
   /* Create page structure */
   return (
     <div className='slideshow' onLoad={() => changeSlide(0)}>
@@ -116,8 +108,6 @@ export const Slideshow = () => {
         <div className="slide" style={{backgroundImage: 'url('+imageSrc+')'}}>
           <div className="numbertext">{index+1} / {arr.length}</div>
           <div className="labelText">{labelText}</div>
-          {/*<img className='bg-image' src={imageSrc} />*/}
-          
           {slideView}
         </div>
       ))
