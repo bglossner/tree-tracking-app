@@ -1,10 +1,13 @@
-import './PartnersSlide.scss';
+import './PartnersSlideView.scss';
 import forestService from '../../assets/images/logos-slide/forest-service.png';
 import calfire from '../../assets/images/logos-slide/calfire-logo.png';
 import ecoslo from '../../assets/images/logos-slide/ecoslo-logo.png';
 import cityOfSlo from '../../assets/images/logos-slide/city-of-slo-logo.png';
 import rotaryClub from '../../assets/images/logos-slide/rotary-club-logo.png';
 
+/**
+ * Creates a clickable icon from a URL and an image 
+ */
 const PartnerLinkImage = ({ link, img }: { link: string, img: JSX.Element }) => {
   return (
     <a className='partner-anchor-wrapper' href={link}>
@@ -13,7 +16,11 @@ const PartnerLinkImage = ({ link, img }: { link: string, img: JSX.Element }) => 
   )
 }
 
-export const PartnersSlide = () => {
+/**
+ * Displays a list of clickable icons that link to the websites of our
+ * project's partners
+ */
+export const PartnersSlideView = () => {
   return (
     <div className='partners-slide-container'>
       <p>Want to help in other ways? Check out resources from our partners.</p>
