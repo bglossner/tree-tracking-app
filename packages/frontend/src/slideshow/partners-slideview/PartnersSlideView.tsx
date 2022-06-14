@@ -1,4 +1,4 @@
-import './PartnersSlide.scss';
+import './PartnersSlideView.scss';
 import forestService from '../../assets/images/logos-slide/forest-service.png';
 import calfire from '../../assets/images/logos-slide/calfire-logo.png';
 import ecoslo from '../../assets/images/logos-slide/ecoslo-logo.png';
@@ -20,7 +20,7 @@ const PartnerLinkImage = ({ link, img }: { link: string, img: JSX.Element }) => 
  * Displays a list of clickable icons that link to the websites of our
  * project's partners
  */
-export const PartnersSlide = () => {
+export const PartnersSlideView = () => {
   return (
     <div className='partners-slide-container'>
       <p>Want to help in other ways? Check out resources from our partners.</p>

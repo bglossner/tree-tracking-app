@@ -1,7 +1,7 @@
 import './Slideshow.scss';
 import { useEffect } from 'react';
 import { BasicTextSlideView } from './basic-text-slideview/BasicTextSlideView';
-import { PartnersSlide } from './logo-slideview/PartnersSlide';
+import { PartnersSlideView } from './partners-slideview/PartnersSlideView';
 
 // Only used original slides 1 & 4
 import slide1Src from '../assets/images/slideshow/slide1.png';
@@ -30,7 +30,7 @@ const slideList: ISlide[] = [
   },
   {
     slideView: (
-      <PartnersSlide />
+      <PartnersSlideView />
     ),
     imageSrc: slide4Src,
     labelText: "OUR PARTNERS"
